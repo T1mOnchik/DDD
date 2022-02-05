@@ -13,7 +13,7 @@ public class CursorChecker : MonoBehaviour
     void Update()
     {
         CursorCheckerFunc();
-        Debug.Log(CursorCheckerFunc());
+        // Debug.Log(CursorCheckerFunc());
     }
     public Transform CursorCheckerFunc(){
         RaycastHit hit;

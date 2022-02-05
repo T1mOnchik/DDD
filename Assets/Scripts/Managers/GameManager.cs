@@ -51,8 +51,6 @@ public class GameManager : MonoBehaviour
         psycheProgressBar = GameObject.Find("Psyche").GetComponent<ProgressBarController>();
         popularityProgressBar = GameObject.Find("Popularity").GetComponent<ProgressBarController>();
 
-        // countOfAllEncounters = startEncounters.Count + concertEncounters.Count + concertEncounters.Count + randomEncounters.Count;
-
         angelButton.onClick.AddListener( () => ClickButton(true) );
         demonButton.onClick.AddListener( () => ClickButton(false) );
         RandomCard();
@@ -64,14 +62,20 @@ public class GameManager : MonoBehaviour
         moneyProgressBar.current += currentCard.GetComponent<EventCardModel>().demonDecision.moneyImpact;
         psycheProgressBar.current += currentCard.GetComponent<EventCardModel>().demonDecision.psycheImpact;
         popularityProgressBar.current += currentCard.GetComponent<EventCardModel>().demonDecision.popularityImpact;
-        RandomCard();
-        // if(isAngel)
-        //     SpawnCard(currentCard.GetComponent<EventCardModel>().cardAngelAnswer);
-        // else
-        //     SpawnCard(currentCard.GetComponent<EventCardModel>().cardDemonAnswer);
+        if(isAngel){    // NU OCHEVIDNO ETO TUPO KOSTYLYOK NADA ISPRAVIT
+            SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
+            step += 2;
+        }
+        else{
+            step ++;
+            SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
+            step ++;
+        }
+            
     }
 
     public void RandomCard(){
+        Debug.Log("zashel v random");
         if(currentCard != null) // Destroing previous card
             Destroy(currentCard);
 
@@ -102,7 +106,7 @@ public class GameManager : MonoBehaviour
         }
         else{
             if(step < CARD_TEXT.Count){
-                Debug.Log("step < CARD_TEXT.Count");
+                // Debug.Log("step < CARD_TEXT.Count");
                 SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
             }
             else
@@ -116,7 +120,8 @@ public class GameManager : MonoBehaviour
     }
 
     private void SpawnCard(string text, Sprite image, bool isEncounter){ 
-
+        if(currentCard != null) // Destroing previous card
+            Destroy(currentCard);
         // instantiating card game object
         GameObject toCreate = isEncounter ? encounterCardPrefab : answerCardPrefab; 
         currentCard = Instantiate(toCreate, new Vector3(0,0,0), Quaternion.identity);
@@ -127,14 +132,14 @@ public class GameManager : MonoBehaviour
         currentCard.transform.Find("Art").GetComponent<Image>().sprite = image;
         currentCard.transform.SetParent(GameObject.Find("Canvas").transform); // making Canvas a parent object of the card to make it visible on the UI
         currentCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.5f, 0); // setting position on the center of the Canvas
-        Debug.Log("SpawnCard: " + currentCard);
+        // Debug.Log("SpawnCard: " + currentCard);
     }
 
-    public bool SetStopButtonsBool(bool isStop){
-        angelButtonObject.SetActive(isStop);
-        demonButtonObject.SetActive(isStop);
-        Debug.Log("Buttons Activated: " + isStop);
-        return isStop;
+    public bool SetStopButtonsBool(bool isActive){
+        angelButtonObject.SetActive(isActive);
+        demonButtonObject.SetActive(isActive);
+        Debug.Log("Buttons Activated: " + isActive);
+        return isActive;
     }
 
     public IEnumerator GuitarHeroEvent()

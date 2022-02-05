@@ -4178,6 +4178,52 @@ MonoBehaviour:
   - Ok, see you later!
   - 'You have a church pianist girl''s hands... Go and paint your nails, don''t embarrass
     yourself! '
+  - You know nothing much about dead metal, so you ask the girl in the salon to paint
+    your nails black. You have more than enough authenticity.
+  - 'You ask the girl in the salon to turn your hands into "the claws of the beast
+    that brings fear and destruction." You walk out of the salon with red and yellow
+    nails. Who knew Ronald McDonald scared the shit out of her once? '
+  - You were asked to go get some snacks for the group.
+  - "Turkey sandwiches\u2026@Great, a little more and we will play k-pop "
+  - 'Nothing but booze, huh? It''s our way! '
+  - 'Crap! I can''t play the guitar! '
+  - You wasted hours studying music theory. In the future, you will only use 5% of
+    this. HAHAh
+  - You have tuned your guitar so low that no human ear can distinguish a note in
+    this hum. Exactly what we need!
+  - 'Hmm...the new janitor hasn''t been found yet, and the stage is filthy as fuck. '
+  - 'Yes, yes, dry the floors yourself, so the soloists do it right? '
+  - 'You covered the dirt with red paint. Now the stage looks like a place of carnage.
+    AWESOME! '
+  - Seems, it's time to decorate the room!
+  - 'You go to the nearest rock music shop and buy lots of merch not even related
+    to death metal. Hope no one finds out what a poser you are. '
+  - You stole a stuffed black goat from the museum. Very authentic!
+  - 'The previous soloist was clearly in better shape than you. Go to the fuckin
+    gym! '
+  - Seeing the mess in the gym, out of habit, you began to mop the floors and wipe
+    the dust. For this, you were awarded subscriptions for the whole year. You obviously
+    didn't come for that, but it's not bad either.
+  - 'You understand that the weight of the bar is clearly beyond your strength. However,
+    remembering that iron is also metal, you begin to drag it furiously, turning
+    yourself into Dead Metal Schwarzenegger. '
+  - Your cat pooped on the sofa
+  - Just remove and clean :|
+  - 'Shit in the cat''s tray, show him who is the Boss here!  '
+  - Hey captain, any change?
+  - 'You poured out your soul to the homeless. He decided to give you all collected
+    pennies. Hope you''re proud of yourself. '
+  - 'You offer him money for his immortal soul. The poor fellow runs away, flashing
+    his heels. '
+  - "Lost all mediators\u2026 Need to find new ones! "
+  - 'You buy a package of picks and a branded box for them. '
+  - You sharpen your thumbnail in the shape of a plectrum
+  - I'm tired, I need to have rest a bit
+  - Piss people off on Twitter
+  - Pentagram cross-stitching
+  - 'You see a stray cat on the street. '
+  - 'You pet the cat and you feel better '
+  - 'You pet the cat and you feel better. Anyway WHO would hate cats? '
   SPRITES:
   - {fileID: 7835032779756320859, guid: 6b08e2e0407cd4246ad335ad04ca623a, type: 3}
   - {fileID: 4345679706368398392, guid: 6b08e2e0407cd4246ad335ad04ca623a, type: 3}
@@ -4191,8 +4237,40 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1d1645f74686d284ebac793b64320373, type: 3}
   - {fileID: 4345679706368398392, guid: 6b08e2e0407cd4246ad335ad04ca623a, type: 3}
   - {fileID: 21300000, guid: 1d1645f74686d284ebac793b64320373, type: 3}
+  - {fileID: 21300000, guid: d26a0de1f8ebe9742b2977f2d40f186e, type: 3}
+  - {fileID: 21300000, guid: 58fefe40348656a40b51cd54c637f226, type: 3}
+  - {fileID: 21300000, guid: 7864f454d7c97934fbe79a6a7d0f489c, type: 3}
+  - {fileID: 21300000, guid: 8f80541b6f59ccb44b8e283224bf8a38, type: 3}
+  - {fileID: 21300000, guid: 1e2f881ab2e2ecc4a940f4e0485e6eb2, type: 3}
+  - {fileID: 21300000, guid: 7bafc1c6cfa156541a9e829002f9b32a, type: 3}
+  - {fileID: 5923596788570943504, guid: 6b08e2e0407cd4246ad335ad04ca623a, type: 3}
   - {fileID: 21300000, guid: c10e89292d0893841b8726ec34d0b3ff, type: 3}
-  IS_ENCOUNTER: 00000000000000000000000001
+  - {fileID: 21300000, guid: 08bf54a5c1ec4574a974de3aebae4c71, type: 3}
+  - {fileID: 5923596788570943504, guid: 6b08e2e0407cd4246ad335ad04ca623a, type: 3}
+  - {fileID: 21300000, guid: 42acdf2c38d1c574e965310004d8148c, type: 3}
+  - {fileID: 21300000, guid: 439e6e12be1d2a148857c95449c82f24, type: 3}
+  - {fileID: 5923596788570943504, guid: 6b08e2e0407cd4246ad335ad04ca623a, type: 3}
+  - {fileID: 21300000, guid: 95cc51704f363634c87f53b8f6811870, type: 3}
+  - {fileID: 21300000, guid: 95cc51704f363634c87f53b8f6811870, type: 3}
+  - {fileID: 21300000, guid: 1d1645f74686d284ebac793b64320373, type: 3}
+  - {fileID: 21300000, guid: 42acdf2c38d1c574e965310004d8148c, type: 3}
+  - {fileID: 21300000, guid: 52b71c833310b0549aa0b31d64901b35, type: 3}
+  - {fileID: 21300000, guid: c78ff92a12a5c24428475c1b3944560d, type: 3}
+  - {fileID: 21300000, guid: 42acdf2c38d1c574e965310004d8148c, type: 3}
+  - {fileID: 21300000, guid: 83bde03d308240d499d60430e1a635b7, type: 3}
+  - {fileID: 21300000, guid: 3047e03915197e646881e9922ece475b, type: 3}
+  - {fileID: 5923596788570943504, guid: 6b08e2e0407cd4246ad335ad04ca623a, type: 3}
+  - {fileID: 4345679706368398392, guid: 6b08e2e0407cd4246ad335ad04ca623a, type: 3}
+  - {fileID: 5923596788570943504, guid: 6b08e2e0407cd4246ad335ad04ca623a, type: 3}
+  - {fileID: 21300000, guid: 5eaf1a4dbac25f247bad93f0fe8b0b86, type: 3}
+  - {fileID: 21300000, guid: a4887496de4f73840b7ecf0d9e6c57b6, type: 3}
+  - {fileID: 5923596788570943504, guid: 6b08e2e0407cd4246ad335ad04ca623a, type: 3}
+  - {fileID: 21300000, guid: 9bf0ca17b3757224eb6aa4c2151fc83a, type: 3}
+  - {fileID: 21300000, guid: 786e61b705c612940af09d0d20c60480, type: 3}
+  - {fileID: 21300000, guid: a1d7dbf790a114e449d5619fc3fa11f5, type: 3}
+  - {fileID: 21300000, guid: 3b20cc50c5d3c094e8d6fda7dc4b80ed, type: 3}
+  - {fileID: 21300000, guid: 3b20cc50c5d3c094e8d6fda7dc4b80ed, type: 3}
+  IS_ENCOUNTER: 000000000000000000000000010000010000010000010000010000010000010000010000010000010000010000
   canvas: {fileID: 2107043520}
   angelButtonObject: {fileID: 975605689}
   demonButtonObject: {fileID: 407680676}
