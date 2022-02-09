@@ -2,53 +2,38 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class EventCardModel : MonoBehaviour
+[Serializable]
+public class EventCardModel
 {
 
-    public DemonDecision demonDecision;
-    public AngelDecision angelDecision;
-    [SerializeField] public GameObject cardAngelAnswer;
-    [SerializeField] public GameObject cardDemonAnswer;
+    private string text;
+    private Sprite sprite;
+    private bool isAnswer; 
+    private int moneyImpact;
+    private int psycheImpact;
+    private int popularityImpact;   
 
-
-    [Serializable]
-    public class DemonDecision{
-
-        public int moneyImpact;
-        public int psycheImpact;
-        public int popularityImpact;
-
-        public DemonDecision(int moneyImpact, int psycheImpact, int popularityImpact){
-            this.moneyImpact = moneyImpact;
-            this.psycheImpact = psycheImpact;
-            this.popularityImpact = popularityImpact;
-        }
+    public EventCardModel(string text, Sprite sprite, bool isAnswer, int moneyImpact, int psycheImpact, int popularityImage){
+        this.text = text;
+        this.sprite = sprite;
+        this.isAnswer = isAnswer;
+        this.moneyImpact = moneyImpact;
+        this.psycheImpact = psycheImpact;
+        this.popularityImpact = popularityImage;
     }
 
-    [Serializable]
-    public class AngelDecision{
+    // [Serializable]
+    // public class Decision{
 
-        public int moneyImpact;
-        public int psycheImpact;
-        public int popularityImpact;
+    //     public int moneyImpact;
+    //     public int psycheImpact;
+    //     public int popularityImpact;
 
-        public AngelDecision(int moneyImpact, int psycheImpact, int popularityImpact){
-            this.moneyImpact = moneyImpact;
-            this.psycheImpact = psycheImpact;
-            this.popularityImpact = popularityImpact;
-        }
-    }
+    //     public Decision(int moneyImpact, int psycheImpact, int popularityImpact){
+    //         this.moneyImpact = moneyImpact;
+    //         this.psycheImpact = psycheImpact;
+    //         this.popularityImpact = popularityImpact;
+    //     }
+    // }
 
-
-    // Start is called before the first frame update`
-    void Start()
-    {
-    
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

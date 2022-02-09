@@ -10,30 +10,46 @@ public class GameManager : MonoBehaviour
    
     public static GameManager instance = null;
     
-    // Database simulatation
+    [Header("Database simulatation")] // Database simulatation
     [SerializeField]private List<string> CARD_TEXT;
     [SerializeField]private List<Sprite> SPRITES;
     [SerializeField]private List<bool> IS_ENCOUNTER;
+    [SerializeField]private List<EventCardModel> cards;
 
-    // UI references
-    [SerializeField]private GameObject canvas;
-    [SerializeField]private GameObject angelButtonObject;
-    [SerializeField]private GameObject demonButtonObject;
+    [Header("UI")]  // UI references
+    [SerializeField]private Sprite moneyImage;
+    [SerializeField]private Sprite psychoImage;
+    [SerializeField]private Sprite popularityImage;
     //    [SerializeField]private GameObject sliderObj;
     [SerializeField]private GameObject end;
     [SerializeField]private GameObject encounterCardPrefab;
     [SerializeField]private GameObject answerCardPrefab;
-    private Button angelButton;
-    private Button demonButton;
+    private GameObject canvas;
+    private GameObject mainMenu;
+    private GameObject normisButtonObject;
+    private GameObject metalButtonObject;
+    private Button normisButton;
+    private Button metalButton;
     private ProgressBarController moneyProgressBar;
     private ProgressBarController psycheProgressBar;
     private ProgressBarController popularityProgressBar;
+
+    [Header("Visual Effects")]    
+    [SerializeField]private int fadeSpeed = 2;
+
+    [Space(15f)]
+
 
     public bool sliderCheck = false;
     public int guitarHeroScore = 0;
     
     private GameObject currentCard;
-    private int step = 0;
+    [SerializeField]private int step = 0;
+    private enum Activity{
+        LoadGame,
+        GuitarHero,
+        smthElse
+    }
     
     
     // Start is called before the first frame update
@@ -44,25 +60,65 @@ public class GameManager : MonoBehaviour
         if(instance == null)
             instance = this;
 
-        angelButtonObject = GameObject.Find("AngelButton");
-        angelButton = angelButtonObject.GetComponent<Button>();
-        demonButton = GameObject.Find("DemonButton").GetComponent<Button>();
+        
+        mainMenu = GameObject.Find("MainMenu");
+        mainMenu.GetComponent<Button>().onClick.AddListener( () => StartCoroutine(LaunchActivity(Activity.LoadGame)) );
+    }
+
+    private void InitGame(){ 
+        canvas = GameObject.Find("Canvas");
+        normisButtonObject = GameObject.Find("NormisButton");
+        metalButtonObject = GameObject.Find("MetalButton");
         moneyProgressBar = GameObject.Find("Money").GetComponent<ProgressBarController>();
         psycheProgressBar = GameObject.Find("Psyche").GetComponent<ProgressBarController>();
         popularityProgressBar = GameObject.Find("Popularity").GetComponent<ProgressBarController>();
-
-        angelButton.onClick.AddListener( () => ClickButton(true) );
-        demonButton.onClick.AddListener( () => ClickButton(false) );
+        normisButton = normisButtonObject.GetComponent<Button>();
+        metalButton = metalButtonObject.GetComponent<Button>();
+        normisButton.onClick.AddListener( () => ClickButton(false) );
+        metalButton.onClick.AddListener( () => ClickButton(true) );
         RandomCard();
-        //StartCoroutine("SliderEvant");
-        // StartCoroutine("GuitarHeroEvent");
     }
 
-    private void ClickButton(bool isAngel){
-        moneyProgressBar.current += currentCard.GetComponent<EventCardModel>().demonDecision.moneyImpact;
-        psycheProgressBar.current += currentCard.GetComponent<EventCardModel>().demonDecision.psycheImpact;
-        popularityProgressBar.current += currentCard.GetComponent<EventCardModel>().demonDecision.popularityImpact;
-        if(isAngel){    // NU OCHEVIDNO ETO TUPO KOSTYLYOK NADA ISPRAVIT
+    private IEnumerator LaunchActivity(Activity activity){
+        yield return StartCoroutine(FadeScreen(true, fadeSpeed));
+        if(activity == Activity.LoadGame){
+            mainMenu.SetActive(false);
+            InitGame();
+        }
+        else if(activity == Activity.GuitarHero){
+            StartCoroutine("GuitarHeroEvent");
+            
+        }
+        
+        yield return StartCoroutine(FadeScreen(false, fadeSpeed));
+        yield break;
+    }
+
+    private IEnumerator FadeScreen(bool fadeToBlack, int fadeSpeed){
+        GameObject fadeFrame = GameObject.Find("FadeFrame");
+        Color objectColor = fadeFrame.GetComponent<Image>().color;
+        float fadeAmount;
+        if(fadeToBlack){
+            while(fadeFrame.GetComponent<Image>().color.a < 1){
+                fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
+                objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+                fadeFrame.GetComponent<Image>().color = objectColor;
+                yield return null;
+            }
+        }
+        else{
+            while(fadeFrame.GetComponent<Image>().color.a > 0){
+                fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
+                objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+                fadeFrame.GetComponent<Image>().color = objectColor;
+                yield return null;
+            }
+        }
+        yield break;
+    }
+
+    private void ClickButton(bool isMetalist){  // answers for this encounter: step + 1 = normis; step + 2 = metalist 
+        if(!isMetalist){    // NU OCHEVIDNO ETO TUPO KOSTYLYOK NADA ISPRAVIT
             SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
             step += 2;
         }
@@ -71,57 +127,51 @@ public class GameManager : MonoBehaviour
             SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
             step ++;
         }
-            
     }
 
     public void RandomCard(){
-        Debug.Log("zashel v random");
         if(currentCard != null) // Destroing previous card
             Destroy(currentCard);
 
         Debug.Log("step: "+step);
-        if(moneyProgressBar.current <= 0){
-            // Debug.Log("Sdoh iz za malo deneg");
-            end.SetActive(true);
-        }
-        else if(moneyProgressBar.current >= 100){
-            // Debug.Log("Sdoh iz za mnogo deneg");
-            end.SetActive(true);
-        }
-        else if(psycheProgressBar.current <= 0){
-            // Debug.Log("Sdoh iz za malo stressa");
-            end.SetActive(true);
-        }
-        else if(psycheProgressBar.current >= 100){
-            // Debug.Log("Sdoh iz za mnogo stressa");
-            end.SetActive(true);
-        }
-        else if(popularityProgressBar.current <= 0){
-            // Debug.Log("Sdoh iz za malo popularnosti");
-            end.SetActive(true);
-        }
-        else if(popularityProgressBar.current >= 100){
-            // Debug.Log("Sdoh iz za mnogo popularnosti");
-            end.SetActive(true);
-        }
+        if(moneyProgressBar.current <= 0)
+            SpawnCard("Not enough money", moneyImage, false);
+        
+        else if(moneyProgressBar.current >= 100)
+            SpawnCard("Too much money", moneyImage, false);
+        
+        else if(psycheProgressBar.current <= 0)
+            SpawnCard("Yeah, looks like Gregory couldn't take all that. Well, bring a new one then!", psychoImage, false);
+        
+        else if(psycheProgressBar.current >= 100)
+            SpawnCard("Gregory realized that he had been unsure of himself all this time. Now he understands that he is happy the way he is. Bad ending? Who knows...", psychoImage, false);
+        
+        else if(popularityProgressBar.current <= 0)
+            SpawnCard("So another band has sunk into oblivion. Remind me, what was it's name?", popularityImage, false);
+        
+        else if(popularityProgressBar.current >= 100)
+            SpawnCard("A metal band that is too popular will sooner or later turn into a piece of pop. Our fans are leaving us, my lord...", popularityImage, false);
+        
         else{
             if(step < CARD_TEXT.Count){
-                // Debug.Log("step < CARD_TEXT.Count");
                 SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
+                if(step == 54)
+                    StartCoroutine(LaunchActivity(Activity.GuitarHero));
             }
             else
             {
                 end.SetActive(true);
             }
-            
-        
         }
         step++; 
     }
 
+    
+
     private void SpawnCard(string text, Sprite image, bool isEncounter){ 
         if(currentCard != null) // Destroing previous card
             Destroy(currentCard);
+
         // instantiating card game object
         GameObject toCreate = isEncounter ? encounterCardPrefab : answerCardPrefab; 
         currentCard = Instantiate(toCreate, new Vector3(0,0,0), Quaternion.identity);
@@ -130,26 +180,26 @@ public class GameManager : MonoBehaviour
         text = text.Replace("@", Environment.NewLine); // @ is an IMPORTANT symbol which says the system to ADD NEW LINE.  
         currentCard.GetComponentInChildren<Text>().text = text;
         currentCard.transform.Find("Art").GetComponent<Image>().sprite = image;
-        currentCard.transform.SetParent(GameObject.Find("Canvas").transform); // making Canvas a parent object of the card to make it visible on the UI
+        currentCard.transform.SetParent(GameObject.Find("CurrentCardLayer").transform); // making Canvas a parent object of the card to make it visible on the UI
         currentCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.5f, 0); // setting position on the center of the Canvas
         // Debug.Log("SpawnCard: " + currentCard);
     }
 
-    public bool SetStopButtonsBool(bool isActive){
-        angelButtonObject.SetActive(isActive);
-        demonButtonObject.SetActive(isActive);
+    public bool setActiveButtons(bool isActive){
+        normisButtonObject.SetActive(isActive);
+        metalButtonObject.SetActive(isActive);
         Debug.Log("Buttons Activated: " + isActive);
         return isActive;
     }
 
     public IEnumerator GuitarHeroEvent()
     {   
-        // while()
+        yield return SceneManager.LoadSceneAsync("GuitarHero", LoadSceneMode.Additive);
         canvas.SetActive(false);
-        SceneManager.LoadSceneAsync("GuitarHero", LoadSceneMode.Additive);
         GameObject audioManagerObj = GameObject.Find("AudioManager");
         AudioManager audioManager = audioManagerObj.GetComponent<AudioManager>();
         audioManager.GuitarMusicPlayer(0);
+        canvas.SetActive(false);
         //AudioManager.SetActive(false);
         //GameObject guitarAudioManager = GameObject.Find("GuitarAudioManager");
         //guitarHeroAudio guitarHeroAudio = guitarAudioManager.GetComponent<GuitarHeroAudio>();

@@ -7,7 +7,7 @@ public class AnswerCard : MonoBehaviour
     public Button cardPanel;
 
     private void Start() {
-        GameManager.instance.SetStopButtonsBool(false);
+        GameManager.instance.setActiveButtons(false);
         cardPanel = GetComponent<Button>();
         cardPanel.onClick.AddListener(DestroyThis);
         // Invoke("DestroyThis", 3f);
@@ -21,7 +21,7 @@ public class AnswerCard : MonoBehaviour
     }
 
     private void DestroyThis(){
-        GameManager.instance.SetStopButtonsBool(true);    
+        GameManager.instance.setActiveButtons(true);    
         GameManager.instance.RandomCard();
         Destroy(gameObject);
     }
