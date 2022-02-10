@@ -41,7 +41,7 @@ public class TargetController : MonoBehaviour
         if(click == true)
         {
             Destroy(other);
-            GameManager.guitarHeroScore++;
+            GuitarHeroManager.instance.guitarHeroScore++;
         }
     }
     

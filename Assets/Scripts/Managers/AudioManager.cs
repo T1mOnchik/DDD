@@ -7,10 +7,13 @@ public class AudioManager : MonoBehaviour
 {
 
     // Start is called before the first frame update
-    //public AudioClip otherClip;
-    public List<AudioClip> musicList;
-    public List<AudioClip> guitarMusicList;
+    public static AudioManager instance;
+    [SerializeField]private List<AudioClip> musicList;
+    // public List<AudioClip> guitarMusicList;
+    [SerializeField]private AudioClip guitarMusic;
+
     private AudioSource mAudio;
+    private bool isPlay = true;
     // IEnumerator Start()
     // {
     //     audio = GetComponent<AudioSource>();
@@ -22,6 +25,11 @@ public class AudioManager : MonoBehaviour
     // }
     void Start()
     {
+        if(instance != this)
+            Destroy(instance);
+        if(instance == null)
+            instance = this;
+
         mAudio = GetComponent<AudioSource>();
         StartCoroutine("MusicPlayer");
     }
@@ -29,7 +37,7 @@ public class AudioManager : MonoBehaviour
     {   
         //audio.volume = 0;
         int i = 0;
-        while(true)
+        while(isPlay)
         {
             if(i < 5)
             {
@@ -45,10 +53,18 @@ public class AudioManager : MonoBehaviour
             yield return null;
         }
     }
-    public void GuitarMusicPlayer(int track)
-    {   Debug.Log("111");
-        StopCoroutine("MusicPlayer");
-        mAudio.clip = guitarMusicList[track];
+
+    public void LaunchGuitarMusicPlayer(float time)
+    {   
+        StartCoroutine(GuitarMusicPlayer(time));
+    }
+
+    private IEnumerator GuitarMusicPlayer(float time){
+        isPlay = false;
+        mAudio.clip = guitarMusic;
         mAudio.Play();
+        yield return new WaitForSeconds(time);
+        isPlay = true;
+        yield break;
     }
 }
