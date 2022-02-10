@@ -509,11 +509,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicList:
-  - {fileID: 8300000, guid: 844789223e317cc4c9cca21e88f21dfd, type: 3}
-  - {fileID: 8300000, guid: c08d9968b23e39d42ae8092414c422e5, type: 3}
-  - {fileID: 8300000, guid: 0b904d19b3559424eaf04b317c41b151, type: 3}
-  - {fileID: 8300000, guid: 555838fa8f50dec4981e5bb9cdc13602, type: 3}
-  - {fileID: 8300000, guid: b881ab45fdf9e2444af60378a25520f1, type: 3}
+  - {fileID: 8300000, guid: d5a48b6b0cadecf44907bec9edfc4102, type: 3}
+  - {fileID: 8300000, guid: 57e6ed394f4ab0d46ad19391daaa420b, type: 3}
+  - {fileID: 8300000, guid: 2fe65d022c8d79a4599ff2b998ef7f1e, type: 3}
+  - {fileID: 8300000, guid: d6623c0f2d8e771438fcf04b3fde238e, type: 3}
   guitarMusic: {fileID: 0}
 --- !u!82 &276232758
 AudioSource:
@@ -2886,7 +2885,6 @@ MonoBehaviour:
   encounterCardPrefab: {fileID: 7645515817878305816, guid: 8024a9056af85234084a228ea2fba761, type: 3}
   answerCardPrefab: {fileID: 6307918414015945750, guid: 77470e0ce4494d647ae9208ab91d903e, type: 3}
   sliderCheck: 0
-  guitarHeroScore: 0
   step: 0
 --- !u!114 &2028837203
 MonoBehaviour:
