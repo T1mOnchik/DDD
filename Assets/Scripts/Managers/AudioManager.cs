@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Security.Cryptography;
+using System.Collections.Generic;
+using System.Runtime;
+using System;
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
@@ -25,6 +29,7 @@ public class AudioManager : MonoBehaviour
     // }
     void Start()
     {
+        ShuffleMusicList();
         if(instance != this)
             Destroy(instance);
         if(instance == null)
@@ -39,7 +44,7 @@ public class AudioManager : MonoBehaviour
         int i = 0;
         while(isPlay)
         {
-            if(i < 5)
+            if(i < musicList.Count)
             {
                 mAudio.clip = musicList[i];
                 mAudio.Play();
@@ -48,9 +53,27 @@ public class AudioManager : MonoBehaviour
             }
             else
             {
+                ShuffleMusicList();
                 i = 0;
             }
             yield return null;
+        }
+    }
+
+    private void ShuffleMusicList()
+    {   
+        RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
+        int n = musicList.Count;
+        while (n > 1)
+        {
+            n--;
+            byte[] box = new byte[1];
+            do provider.GetBytes(box);
+            while (!(box[0] < n * (Byte.MaxValue / n)));
+            int k = (box[0] % n);
+            AudioClip value = musicList[k];
+            musicList[k] = musicList[n];
+            musicList[n] = value;
         }
     }
 
