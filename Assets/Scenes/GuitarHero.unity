@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 132894863}
   - component: {fileID: 132894862}
   m_Layer: 0
-  m_Name: kot_stoit
+  m_Name: Needle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5a53dd49327c174f9c95570ef70ae62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destination: {x: 0, y: 0}
 --- !u!212 &132894863
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -265,6 +266,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6048452333595551880, guid: fd1c2fa3c6b08434eb5365ededf82cbe, type: 3}
+      propertyPath: needle
+      value: 
+      objectReference: {fileID: 132894860}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd1c2fa3c6b08434eb5365ededf82cbe, type: 3}
 --- !u!1 &249035795
@@ -298,6 +303,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0666798cbd5bc24a9a2d9def376927d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needle: {fileID: 0}
+  qualitySliderController: {fileID: 0}
+  currentCircle: {fileID: 0}
+  qualityCounter: 0
+  active: 0
 --- !u!58 &249035797
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -410,6 +420,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0666798cbd5bc24a9a2d9def376927d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needle: {fileID: 0}
+  qualitySliderController: {fileID: 0}
+  currentCircle: {fileID: 0}
+  qualityCounter: 0
+  active: 0
 --- !u!58 &298388245
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -605,6 +620,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0666798cbd5bc24a9a2d9def376927d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needle: {fileID: 0}
+  qualitySliderController: {fileID: 0}
+  currentCircle: {fileID: 0}
+  qualityCounter: 0
+  active: 0
 --- !u!58 &532520453
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -939,6 +959,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2887806187155112806, guid: 742f2121ae6744a708c9c193c1a8a20e, type: 3}
+      propertyPath: needle
+      value: 
+      objectReference: {fileID: 132894860}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 742f2121ae6744a708c9c193c1a8a20e, type: 3}
 --- !u!1 &1668302715
@@ -1084,6 +1108,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5978724171170908636, guid: fcebbced3904849afad7ba83a6ebd343, type: 3}
+      propertyPath: needle
+      value: 
+      objectReference: {fileID: 132894860}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcebbced3904849afad7ba83a6ebd343, type: 3}
 --- !u!1001 &8994559974969263477
