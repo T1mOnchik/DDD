@@ -3,46 +3,53 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TargetController : MonoBehaviour
-{   
-    public GameObject gameManager;
-    public GameManager GameManager;
-    private bool click = false; 
-    //public List <GameObject> redCircles;
-    // Start is called before the first frame update
+{ 
+    public GameObject needle;
+    public QualitySliderController qualitySliderController;
+    [SerializeField]private GameObject currentCircle;
+    [SerializeField]private float qualityCounter;
+    [SerializeField]private bool active = false;
+
     void Start()
     {
-        gameManager = GameObject.Find("GameManager");
-        GameManager = gameManager.GetComponent<GameManager>();
+        qualitySliderController = needle.GetComponent<QualitySliderController>();
+    }
+ 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        currentCircle = other.gameObject;
+        active = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //Debug.Log(click);
-    }
-    void OnTriggerStay2D(Collider2D other)
-    {
-        //Debug.Log(other);
-        DestroyCircle(other.gameObject);
-    }
-    void OnMouseDown()
-    {
-        click = true;
-        StartCoroutine("ClickDeley");
-    }
-    private IEnumerator ClickDeley()
-    {
-        yield return null;
-        click = false;
-        yield break;
-    }
-    private void DestroyCircle(GameObject other)
-    {
-        if(click == true)
+    void OnTriggerExit2D()
+    {   
+        if(active)
         {
-            Destroy(other);
-            GuitarHeroManager.instance.guitarHeroScore++;
+            SubtractScore();
+            active = false;
         }
     }
+
+    void OnMouseDown()
+    {
+        if(active)
+        {   
+            active = false;
+            Destroy(currentCircle);
+            AddScore();
+        }
+    }
+
+    void AddScore()
+    {  
+        if(qualitySliderController.destination.x < 3f)
+        qualitySliderController.destination.x += 1;
+    }
+
+    void SubtractScore()
+    {  
+        if(qualitySliderController.destination.x > -3f)
+        qualitySliderController.destination.x -= 1;
+    } 
     
 }
