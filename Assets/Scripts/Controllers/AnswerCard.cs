@@ -8,7 +8,7 @@ public class AnswerCard : MonoBehaviour
 
     private void Start() {
         GameManager.instance.setActiveButtons(false);
-        cardPanel = GetComponent<Button>();
+        cardPanel = GameObject.Find("CurrentCardLayer").GetComponent<Button>();
         cardPanel.onClick.AddListener(DestroyThis);
         // Invoke("DestroyThis", 3f);
     }

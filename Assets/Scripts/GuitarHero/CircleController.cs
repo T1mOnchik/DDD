@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CircleController : MonoBehaviour
 {   
+    private float speed = 50f;
+
     Rigidbody2D mRigidbody;
     // Start is called before the first frame update
     void Start()
@@ -14,6 +16,6 @@ public class CircleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mRigidbody.AddForce(-transform.up);
+        mRigidbody.AddForce(-transform.up * speed *Time.deltaTime);
     }
 }

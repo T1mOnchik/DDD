@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Security.Cryptography;
-using System.Collections.Generic;
-using System.Runtime;
 using System;
 
 [RequireComponent(typeof(AudioSource))]

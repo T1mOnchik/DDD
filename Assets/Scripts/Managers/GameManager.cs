@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
             Destroy(instance);
         if(instance == null)
             instance = this;
+
+        new CSVParser().ParseCSVToCards();
     }
 
     public void InitGame(){ 
