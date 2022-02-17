@@ -6,34 +6,36 @@ using System;
 public class EventCardModel
 {
 
-    private string text;
-    private Sprite sprite;
-    private bool isAnswer; 
-    private int moneyImpact;
-    private int psycheImpact;
-    private int popularityImpact;   
-
-    public EventCardModel(string text, Sprite sprite, bool isAnswer, int moneyImpact, int psycheImpact, int popularityImage){
-        this.text = text;
-        this.sprite = sprite;
-        this.isAnswer = isAnswer;
-        this.moneyImpact = moneyImpact;
-        this.psycheImpact = psycheImpact;
-        this.popularityImpact = popularityImage;
+    public string encounterText;
+    public string normisText;
+    public string metalText;
+    // public Sprite sprite;
+    public string eSpriteName;
+    public string nSpriteName;
+    public string mSpriteName;
+    public float moneyImpactNormis;
+    public float moneyImpactMetal;
+    public float psycheImpactNormis;
+    public float psycheImpactMetal;
+    public float popularityImpactNormis;
+    public float popularityImpactMetal;
+    public bool isAnswer;
+    
+    public EventCardModel(string rowData){
+        string [] data = rowData.Split(';');
+        
+        this.encounterText = data[0]; 
+        this.eSpriteName = data[1];
+        this.normisText = data[2];
+        this.nSpriteName = data[3];
+        this.metalText = data[4];
+        this.mSpriteName = data[5];
+        this.moneyImpactNormis = float.Parse(data[6]);
+        this.psycheImpactNormis = float.Parse(data[7]);
+        this.popularityImpactNormis = float.Parse(data[8]);
+        this.moneyImpactMetal = float.Parse(data[9]);
+        this.psycheImpactMetal = float.Parse(data[10]);
+        this.popularityImpactMetal = float.Parse(data[11]);
     }
-
-    // [Serializable]
-    // public class Decision{
-
-    //     public int moneyImpact;
-    //     public int psycheImpact;
-    //     public int popularityImpact;
-
-    //     public Decision(int moneyImpact, int psycheImpact, int popularityImpact){
-    //         this.moneyImpact = moneyImpact;
-    //         this.psycheImpact = psycheImpact;
-    //         this.popularityImpact = popularityImpact;
-    //     }
-    // }
 
 }

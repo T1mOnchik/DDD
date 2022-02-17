@@ -19,7 +19,7 @@ public class GuitarHeroManager : MonoBehaviour
             instance = this;
 
 
-        canvas = GameObject.Find("GameLayout");    
+        canvas = GameObject.Find("Background");    
         if(eventInstance != null)
             StopCoroutine(eventInstance);
         eventInstance = StartCoroutine(GuitarHeroEvent());

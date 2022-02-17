@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CircleController : MonoBehaviour
 {   
+    [SerializeField]private float speed = 50f;
+
     Rigidbody2D mRigidbody;
-    public float speed;
 
     void Start()
     {
@@ -14,6 +15,6 @@ public class CircleController : MonoBehaviour
 
     void Update()
     {
-        mRigidbody.velocity = new Vector2(0, -speed);
+        mRigidbody.AddForce(-transform.up * speed *Time.deltaTime);
     }
 }
