@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
 {
    
     public static GameManager instance = null;
-    
+    public GameObject sliderObject;
+
     [Header("Database simulatation")] // Database simulatation
     [SerializeField]private List<string> CARD_TEXT;
     [SerializeField]private List<Sprite> SPRITES;
@@ -42,9 +43,10 @@ public class GameManager : MonoBehaviour
     [HideInInspector]public Animator metalButtonAnimator;
     private GameObject oldCard;
     
+    [SerializeField]private bool sliderGameResult;
     // Start is called before the first frame update
     void Start()
-    {   
+    {
         if(instance != this)
             Destroy(instance);
         if(instance == null)
@@ -220,4 +222,18 @@ public class GameManager : MonoBehaviour
     //     Debug.Log("222");
     //     yield break;
     // }
+    private IEnumerator SliderGame()
+    {   
+        SliderController sliderController = sliderObject.GetComponent<SliderController>();
+        sliderObject.SetActive(true);
+        while(!sliderController.isGameEnd)
+        {
+            yield return null;
+        }
+        sliderGameResult = sliderController.result;
+        sliderObject.SetActive(false);
+        Debug.Log(sliderGameResult);
+        yield break;
+    }
+    
 }
