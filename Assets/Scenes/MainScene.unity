@@ -3409,12 +3409,9 @@ MonoBehaviour:
   answerCardPrefab: {fileID: 6307918414015945750, guid: 77470e0ce4494d647ae9208ab91d903e, type: 3}
   sliderCheck: 0
   step: 0
-<<<<<<< HEAD
   normisButtonAnimator: {fileID: 0}
   metalButtonAnimator: {fileID: 0}
-=======
   sliderGameResult: 0
->>>>>>> d35ddcd1a75dab4e1998fb849bc5a67f57918a6b
 --- !u!114 &2028837203
 MonoBehaviour:
   m_ObjectHideFlags: 0
