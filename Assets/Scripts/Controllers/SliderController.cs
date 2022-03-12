@@ -10,9 +10,27 @@ public class SliderController : MonoBehaviour
     public bool mouseDown = false;
     public Slider slider;
     private bool moveToRight = true;
+    public bool result;
+    public bool isGameEnd = false;
+
+    private GameObject currentCardLayer;
+    private GameObject bottomPanel;
+    private GameObject escButton;
+    private GameObject normisButton;
+    private GameObject metalButton;
     // Start is called before the first frame update
     void Start()
     {
+       currentCardLayer = GameObject.Find("CurrentCardLayer");
+       bottomPanel = GameObject.Find("BottomPanel");
+       escButton = GameObject.Find("EscButton");
+       normisButton = GameObject.Find("NormisButton");
+       metalButton = GameObject.Find("MetalButton");
+       currentCardLayer.SetActive(false);
+       bottomPanel.SetActive(false);
+       escButton.SetActive(false);
+       normisButton.SetActive(false);
+       metalButton.SetActive(false);
        gameManager = GameObject.Find("GameManager");
        GameManager = gameManager.GetComponent<GameManager>();
        slider = GetComponent<Slider>(); 
@@ -27,16 +45,15 @@ public class SliderController : MonoBehaviour
     void OnMouseDown()
     {
         mouseDown = true;
-        //Debug.Log("111");
     }
-    private IEnumerator MoveSlider()
+    public IEnumerator MoveSlider()
     {
         while(mouseDown == false)
         { 
             if(moveToRight)
             {
                 slider.value += 0.025f;
-                yield return new WaitForSeconds(0.0025f);
+                yield return new WaitForSeconds(0.025f);
                 if(slider.value == 1)
                 {
                     moveToRight = false;
@@ -45,7 +62,7 @@ public class SliderController : MonoBehaviour
             else
             {
                 slider.value -= 0.025f;
-                yield return new WaitForSeconds(0.0025f);
+                yield return new WaitForSeconds(0.025f);
                 if(slider.value == 0)
                 {
                     moveToRight = true;
@@ -56,13 +73,20 @@ public class SliderController : MonoBehaviour
         if(slider.value >= 0.4f && slider.value <= 0.6f)
         {
             GameManager.sliderCheck = true;
+            result = true;
             //положительное событие
         }
         else
         {
+            result = false;
             //отрицательное событие
         }
-        //Debug.Log("Nice");
+        currentCardLayer.SetActive(true);
+        bottomPanel.SetActive(true);
+        escButton.SetActive(true);
+        normisButton.SetActive(true);
+        metalButton.SetActive(true);
+        isGameEnd = true;
         yield break;
     }
 }
