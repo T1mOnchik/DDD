@@ -6,6 +6,7 @@ public class AccelerometerController : MonoBehaviour
 {
     [SerializeField]private Vector3 acceleration;
     public float speed;
+    public bool result;
     private float random;
     private Vector3 sliderSize;
     private float needleBorder;
@@ -16,6 +17,7 @@ public class AccelerometerController : MonoBehaviour
         // sliderSize = transform.parent.GetComponent<Renderer>().bounds.size;
         // needleBorder = sliderSize.x / 2 - 0.5f;
         // Debug.Log(needleBorder);
+        StartCoroutine("DelayCoroutine");
     }
 
     // Update is called once per frame
@@ -48,6 +50,22 @@ public class AccelerometerController : MonoBehaviour
             yield return new WaitForSeconds(1f);
             yield return null;
         }
+    }
+
+    private IEnumerator DelayCoroutine()
+    {
+        yield return new WaitForSeconds(10f);
+        if(transform.localPosition.x > -0.8 && transform.localPosition.x < 0.8)
+        {
+            result = true;
+        }
+        else
+        {
+            result = false;
+        }
+        Debug.Log(result);
+        //выход из игры
+        yield break;
     }
 
 }

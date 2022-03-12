@@ -15,6 +15,7 @@ public class CircleController : MonoBehaviour
 
     void Update()
     {
+        if(mRigidbody.velocity.y > -4)
         mRigidbody.AddForce(-transform.up * speed *Time.deltaTime);
     }
 }

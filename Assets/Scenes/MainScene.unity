@@ -513,7 +513,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2fe65d022c8d79a4599ff2b998ef7f1e, type: 3}
   - {fileID: 8300000, guid: d5a48b6b0cadecf44907bec9edfc4102, type: 3}
   - {fileID: 8300000, guid: 57e6ed394f4ab0d46ad19391daaa420b, type: 3}
-  guitarMusic: {fileID: 8300000, guid: 6c57edc7bcdb99b4daa0fcd61cfc51d6, type: 3}
+  guitarMusic: {fileID: 8300000, guid: 7ece3c1d05973904ab2ed3b4fee5852b, type: 3}
 --- !u!82 &276232758
 AudioSource:
   m_ObjectHideFlags: 0
