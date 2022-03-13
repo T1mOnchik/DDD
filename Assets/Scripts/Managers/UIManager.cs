@@ -7,13 +7,15 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance = null;
     private GameObject mainMenu;
+    [SerializeField]private GameObject slider;
     
     [Header("Visual Effects")]    
     [SerializeField]private int fadeSpeed = 2;
     public enum Activity{
         LoadGame,
         GuitarHero,
-        smthElse
+        AccelerometerGame,
+        SliderGame
     }
 
     // Start is called before the first frame update
@@ -41,6 +43,10 @@ public class UIManager : MonoBehaviour
         else if(activity == Activity.GuitarHero){
             yield return SceneManager.LoadSceneAsync("GuitarHero", LoadSceneMode.Additive);
             GameManager.instance.RandomCard();
+        }
+        else if(activity == Activity.SliderGame){
+            yield return StartCoroutine(FadeScreen(false, fadeSpeed));
+            yield return GameManager.instance.SliderGame();
         }
         
         yield return StartCoroutine(FadeScreen(false, fadeSpeed));

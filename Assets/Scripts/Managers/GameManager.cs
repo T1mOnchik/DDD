@@ -109,7 +109,9 @@ public class GameManager : MonoBehaviour
         
         if(oldCard != null){ // Destroing previous card
             Destroy(oldCard);
+            Debug.Log(oldCard);
             oldCard = null;
+            
         }
         currentCard.transform.SetParent(GameObject.Find("TopLayer").transform);
         yield break;
@@ -148,6 +150,11 @@ public class GameManager : MonoBehaviour
             if(step < CARD_TEXT.Count){
                 if(step == 54)
                     UIManager.instance.LaunchActivity(UIManager.Activity.GuitarHero);
+                else if(step == 56){
+                    Debug.Log("Slider");
+                    UIManager.instance.LaunchActivity(UIManager.Activity.SliderGame);
+                }
+                    
                 else
                     SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
             }
@@ -222,7 +229,7 @@ public class GameManager : MonoBehaviour
     //     Debug.Log("222");
     //     yield break;
     // }
-    private IEnumerator SliderGame()
+    public IEnumerator SliderGame()
     {   
         SliderController sliderController = sliderObject.GetComponent<SliderController>();
         sliderObject.SetActive(true);

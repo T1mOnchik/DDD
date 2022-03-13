@@ -28,11 +28,10 @@ public class SliderController : MonoBehaviour
        metalButton = GameObject.Find("MetalButton");
        currentCardLayer.SetActive(false);
        bottomPanel.SetActive(false);
-       escButton.SetActive(false);
-       normisButton.SetActive(false);
-       metalButton.SetActive(false);
+        normisButton?.SetActive(false);
+       metalButton?.SetActive(false);
        gameManager = GameObject.Find("GameManager");
-       GameManager = gameManager.GetComponent<GameManager>();
+       GameManager = GameManager.instance;
        slider = GetComponent<Slider>(); 
        StartCoroutine("MoveSlider");
     }
@@ -40,12 +39,12 @@ public class SliderController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.touchCount > 0)
+        {
+            mouseDown = true;
+        }
     }
-    void OnMouseDown()
-    {
-        mouseDown = true;
-    }
+
     public IEnumerator MoveSlider()
     {
         while(mouseDown == false)

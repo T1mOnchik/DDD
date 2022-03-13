@@ -46,38 +46,29 @@ public class Card : MonoBehaviour
         if(!isEncounter){
             // GameManager.instance.setActiveButtons(false);
             // StartCoroutine(DeactivateButtons());
-            cardPanel = GameObject.Find("CurrentCardLayer").GetComponent<Button>();
-            cardPanel.onClick.AddListener(DestroyThis);
-            Invoke("ActivateCard", 0.5f);
+            // cardPanel = GameObject.Find("CurrentCardLayer").GetComponent<Button>();
+            // cardPanel.onClick.AddListener(DestroyThis);
+            
+            Invoke("ActivateCard", 0.7f);
         }
     }
 
     private void ActivateCard(){
-        cardPanel.enabled = true;
+        cardPanel = GameObject.Find("CurrentCardLayer").GetComponent<Button>();
+        cardPanel.onClick.AddListener(DestroyThis);
     }
 
-    // private IEnumerator DeactivateButtons(){
-    //     yield return new WaitForSeconds(0.1f);
-    //     AnimatorStateInfo normisAnim = GameManager.instance.normisButtonAnimator.GetCurrentAnimatorStateInfo(0);
-    //     AnimatorStateInfo metalAnim = GameManager.instance.metalButtonAnimator.GetCurrentAnimatorStateInfo(0);
-    //     Debug.Log(normisAnim.IsName("Default"));
-    //     Debug.Log(metalAnim.IsName("Click"));
-    //     if(normisAnim.IsName("NormisClick"))
-    //         yield return new WaitForSeconds(normisAnim.length);
-    //     if(metalAnim.IsName("MetalClick"))
-    //         yield return new WaitForSeconds(metalAnim.length);
-    //     GameManager.instance.setActiveButtons(false);
-    // }
-
     private void DestroyThis(){
-        
+        Debug.Log("current card desroing: "+this);
         // GameManager.instance.setActiveButtons(true);    
+        
         GameManager.instance.NextCard("MoveToMetal");
-        cardPanel.enabled = false;
         // Destroy(gameObject);
     }
 
     public float RemoveCardAnimation(string animName){
+        if(cardPanel != null)
+            cardPanel.onClick.RemoveAllListeners();
         animator.SetTrigger(animName);
         return animator.runtimeAnimatorController.animationClips[0].length;
         // mAnimation.Play("MoveToMetal");
