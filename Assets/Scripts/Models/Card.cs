@@ -59,9 +59,6 @@ public class Card : MonoBehaviour
     }
 
     private void DestroyThis(){
-        Debug.Log("current card desroing: "+this);
-        // GameManager.instance.setActiveButtons(true);    
-        
         GameManager.instance.NextCard("MoveToMetal");
         // Destroy(gameObject);
     }

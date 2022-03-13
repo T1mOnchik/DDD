@@ -28,7 +28,9 @@ public class SliderController : MonoBehaviour
        metalButton = GameObject.Find("MetalButton");
        currentCardLayer.SetActive(false);
        bottomPanel.SetActive(false);
-        normisButton?.SetActive(false);
+    //    if(normisButton != null)
+            normisButton?.SetActive(false);
+        
        metalButton?.SetActive(false);
        gameManager = GameObject.Find("GameManager");
        GameManager = GameManager.instance;
@@ -41,9 +43,19 @@ public class SliderController : MonoBehaviour
     {
         if(Input.touchCount > 0)
         {
+            
             mouseDown = true;
         }
     }
+
+   
+    void OnMouseDown()
+    {
+        Debug.Log(Input.touchCount);
+        mouseDown = true;
+    }
+    
+    
 
     public IEnumerator MoveSlider()
     {

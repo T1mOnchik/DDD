@@ -2874,6 +2874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a919e0b6f4b2f2c41a1f42e693970aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 2067891191}
   slider: {fileID: 0}
   fadeSpeed: 2
 --- !u!1 &2067891191

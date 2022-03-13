@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]private GameObject end;
     [SerializeField]private GameObject encounterCardPrefab;
     [SerializeField]private GameObject answerCardPrefab;
-    private GameObject canvas;
     private GameObject normisButtonObject;
     private GameObject metalButtonObject;
     private Button normisButton;
@@ -56,7 +55,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void InitGame(){ 
-        canvas = GameObject.Find("Canvas");
         normisButtonObject = GameObject.Find("NormisButton");
         metalButtonObject = GameObject.Find("MetalButton");
         moneyProgressBar = GameObject.Find("Money").GetComponent<ProgressBarController>();
@@ -150,10 +148,12 @@ public class GameManager : MonoBehaviour
             if(step < CARD_TEXT.Count){
                 if(step == 54)
                     UIManager.instance.LaunchActivity(UIManager.Activity.GuitarHero);
-                else if(step == 56){
-                    Debug.Log("Slider");
+
+                else if(step == 55)
+                    UIManager.instance.LaunchActivity(UIManager.Activity.AccelerometerGame);
+
+                else if(step == 56)
                     UIManager.instance.LaunchActivity(UIManager.Activity.SliderGame);
-                }
                     
                 else
                     SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
