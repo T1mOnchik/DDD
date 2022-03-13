@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance = null;
     private GameObject mainMenu;
+    private GameObject canvas;
     [SerializeField]private GameObject slider;
     
     [Header("Visual Effects")]    
@@ -26,6 +27,7 @@ public class UIManager : MonoBehaviour
         if(instance == null)
             instance = this;
 
+        canvas = GameObject.Find("Background");
         mainMenu = GameObject.Find("MainMenu");
         mainMenu.GetComponent<Button>().onClick.AddListener( () => LaunchActivity(Activity.LoadGame));
     }
@@ -47,6 +49,15 @@ public class UIManager : MonoBehaviour
         else if(activity == Activity.SliderGame){
             yield return StartCoroutine(FadeScreen(false, fadeSpeed));
             yield return GameManager.instance.SliderGame();
+            GameManager.instance.RandomCard();
+        }
+        else if(activity == Activity.AccelerometerGame){
+            // canvas = GameObject.Find("Background");
+            canvas.SetActive(false);
+            
+            yield return SceneManager.LoadSceneAsync("AccelerometerGame", LoadSceneMode.Additive);
+            canvas.SetActive(true);
+            GameManager.instance.RandomCard();
         }
         
         yield return StartCoroutine(FadeScreen(false, fadeSpeed));
