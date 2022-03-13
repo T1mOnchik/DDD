@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]private List<string> CARD_TEXT;
     [SerializeField]private List<Sprite> SPRITES;
     [SerializeField]private List<bool> IS_ENCOUNTER;
-    [SerializeField]private List<EventCardModel> cards;
+    [SerializeField]private List<Card> cards;
+
     [Header("Visuals")]  // UI references
     [SerializeField]private Sprite moneyImage;
     [SerializeField]private Sprite psychoImage;
@@ -37,7 +38,11 @@ public class GameManager : MonoBehaviour
     public bool sliderCheck = false;
     
     private GameObject currentCard;
-    [SerializeField]private int step = 0;
+    [SerializeField]public int step = 0;
+    [HideInInspector]public Animator normisButtonAnimator;
+    [HideInInspector]public Animator metalButtonAnimator;
+    private GameObject oldCard;
+    
     [SerializeField]private bool sliderGameResult;
     // Start is called before the first frame update
     void Start()
@@ -47,7 +52,7 @@ public class GameManager : MonoBehaviour
         if(instance == null)
             instance = this;
 
-        new CSVParser().ParseCSVToCards();
+        cards = new CSVParser().ConvertCSVToCards();
     }
 
     public void InitGame(){ 
@@ -61,24 +66,66 @@ public class GameManager : MonoBehaviour
         metalButton = metalButtonObject.GetComponent<Button>();
         normisButton.onClick.AddListener( () => ClickButton(false) );
         metalButton.onClick.AddListener( () => ClickButton(true) );
+        normisButtonAnimator = normisButtonObject.GetComponent<Animator>();
+        metalButtonAnimator = metalButtonObject.GetComponent<Animator>();
         RandomCard();
     }
 
     private void ClickButton(bool isMetalist){  // answers for this encounter: step + 1 = normis; step + 2 = metalist 
         if(!isMetalist){    // NU OCHEVIDNO ETO TUPO KOSTYLYOK NADA ISPRAVIT
-            SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
-            step += 2;
+            NextCard("MoveToNormis");
+            normisButtonAnimator.SetTrigger("isClicked");
+            StartCoroutine(onButtonAnimFinished(normisButtonAnimator));
+            step ++;
         }
         else{
             step ++;
-            SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
-            step ++;
+            metalButtonAnimator.SetTrigger("isClicked");
+            StartCoroutine(onButtonAnimFinished(metalButtonAnimator));
+            NextCard("MoveToMetal");
+            
         }
     }
 
+    private IEnumerator onButtonAnimFinished(Animator animator){
+        yield return new WaitForSeconds(0.47f);
+        setActiveButtons(false);
+    }
+
+    public void NextCard(string anim){
+        oldCard = currentCard;
+        StartCoroutine(PlayCardAnimation( anim));
+        // StartCoroutine(SpawnCardAfterAnimation());
+        // Debug.Log(normisButtonObject.GetComponent<Animator>().runtimeAnimatorController.animationClips[0]);
+        // SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
+        RandomCard();
+        // step++;
+    }
+
+    private IEnumerator PlayCardAnimation( string animName){
+        // Debug.Log(animName);
+        
+        yield return new WaitForSeconds(currentCard.GetComponent<Card>().RemoveCardAnimation(animName)); // activating the card sliding animation and waiting for the end of it
+        
+        if(oldCard != null){ // Destroing previous card
+            Destroy(oldCard);
+            Debug.Log(oldCard);
+            oldCard = null;
+            
+        }
+        currentCard.transform.SetParent(GameObject.Find("TopLayer").transform);
+        yield break;
+    }
+    // private IEnumerator SpawnCardAfterAnimation(){
+    //     normisButtonObject.GetComponent<Animator>().SetTrigger("isClicked");
+    //     yield return new WaitForSeconds(.runtimeAnimatorController.animationClips[0].length);
+    //     yield break;
+    //     // setActiveButtons(false);
+    // }
+
     public void RandomCard(){
-        if(currentCard != null) // Destroing previous card
-            Destroy(currentCard);
+        // if(currentCard != null) // Destroing previous card
+        //     Destroy(currentCard);
 
         Debug.Log("step: "+step);
         if(moneyProgressBar.current <= 0)
@@ -103,6 +150,11 @@ public class GameManager : MonoBehaviour
             if(step < CARD_TEXT.Count){
                 if(step == 54)
                     UIManager.instance.LaunchActivity(UIManager.Activity.GuitarHero);
+                else if(step == 56){
+                    Debug.Log("Slider");
+                    UIManager.instance.LaunchActivity(UIManager.Activity.SliderGame);
+                }
+                    
                 else
                     SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
             }
@@ -116,21 +168,41 @@ public class GameManager : MonoBehaviour
 
     
 
-    private void SpawnCard(string text, Sprite image, bool isEncounter){ 
-        if(currentCard != null) // Destroing previous card
-            Destroy(currentCard);
-
+    private GameObject SpawnCard(string text, Sprite image, bool isEncounter){ 
         // instantiating card game object
-        GameObject toCreate = isEncounter ? encounterCardPrefab : answerCardPrefab; 
-        currentCard = Instantiate(toCreate, new Vector3(0,0,0), Quaternion.identity);
+        currentCard = Instantiate(encounterCardPrefab, new Vector3(0,0,0), Quaternion.identity);
 
         //setting card's parameters
+        currentCard.GetComponent<Card>().isEncounter = isEncounter;
+        Debug.Log(isEncounter);
+        if(isEncounter) setActiveButtons(true);
+        if(oldCard == null) setActiveButtons(false);
+        else if(!isEncounter && !oldCard.GetComponent<Card>().isEncounter) setActiveButtons(false);
+        
         text = text.Replace("@", Environment.NewLine); // @ is an IMPORTANT symbol which says the system to ADD NEW LINE.  
+        currentCard.transform.SetParent(GameObject.Find("SpawnPoint").transform);// setting Canvas as a parent object of the card to make it visible on the UI
         currentCard.GetComponentInChildren<Text>().text = text;
-        currentCard.transform.Find("Art").GetComponent<Image>().sprite = image;
-        currentCard.transform.SetParent(GameObject.Find("CurrentCardLayer").transform); // setting Canvas as a parent object of the card to make it visible on the UI
+        
+        currentCard.transform.Find("Card").transform.Find("Art").GetComponent<Image>().sprite = image;
         currentCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.5f, 0); // setting position on the center of the Canvas
+        return currentCard;
     }
+
+    //  private void SpawnCard(Card card){ 
+    //     if(currentCard != null) // Destroing previous card
+    //         Destroy(currentCard);
+
+    //     // instantiating card game object
+    //     GameObject toCreate = isEncounter ? encounterCardPrefab : answerCardPrefab; 
+    //     currentCard = Instantiate(toCreate, new Vector3(0,0,0), Quaternion.identity);
+
+    //     //setting card's parameters
+    //     text = text.Replace("@", Environment.NewLine); // @ is an IMPORTANT symbol which says the system to ADD NEW LINE.  
+    //     currentCard.GetComponentInChildren<Text>().text = text;
+    //     currentCard.transform.Find("Art").GetComponent<Image>().sprite = image;
+    //     currentCard.transform.SetParent(GameObject.Find("CurrentCardLayer").transform); // setting Canvas as a parent object of the card to make it visible on the UI
+    //     currentCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.5f, 0); // setting position on the center of the Canvas
+    // }
 
     public bool setActiveButtons(bool isActive){
         normisButtonObject.SetActive(isActive);
@@ -157,7 +229,7 @@ public class GameManager : MonoBehaviour
     //     Debug.Log("222");
     //     yield break;
     // }
-    private IEnumerator SliderGame()
+    public IEnumerator SliderGame()
     {   
         SliderController sliderController = sliderObject.GetComponent<SliderController>();
         sliderObject.SetActive(true);

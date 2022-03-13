@@ -6,7 +6,7 @@ public class GuitarHeroManager : MonoBehaviour
 {
     public static GuitarHeroManager instance;
     private GameObject canvas;
-    [SerializeField]private float time = 15f; // time after which guitarhero will be closed
+    [SerializeField]private float time = 58f; // time after which guitarhero will be closed
     private Coroutine eventInstance;
     public int guitarHeroScore = 0;
 

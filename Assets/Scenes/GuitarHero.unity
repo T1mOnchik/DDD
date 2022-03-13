@@ -1875,7 +1875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8bdd4d4c586f0a42ae238d649fbd1ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 15
+  time: 58
   guitarHeroScore: 0
 --- !u!4 &778817651
 Transform:

@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CircleController : MonoBehaviour
 {   
-    [SerializeField]private float speed = 50f;
-
     Rigidbody2D mRigidbody;
+    public float speed;
 
     void Start()
     {

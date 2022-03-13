@@ -1,38 +1,38 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class CSVParser
 {
 
-    public void ParseCSVToCards()
+    public List<Card> ConvertCSVToCards()
     {
         string[] csvLines = System.IO.File.ReadAllLines(@"D:\Unity\UnityProjects\DDD\Assets\Resources\script_example\example.csv");
-        List<EventCardModel> cards = new List<EventCardModel>();
+        List<Card> cards = new List<Card>();
 
         for (int i = 1; i < csvLines.Length; i++)
         {
-            EventCardModel cardModel = new EventCardModel(csvLines[i]);
+            Card cardModel = new Card(csvLines[i]);
             cards.Add(cardModel);
         }   
         // int j = 0;
         // foreach (var card in cards)
         // { 
-        //     Debug.Log("Card #" + j);
-        //     Debug.Log(card.encounterText);
-        //     Debug.Log(card.eSpriteName);
-        //     Debug.Log(card.normisText);
-        //     Debug.Log(card.nSpriteName);
-        //     Debug.Log(card.metalText);
-        //     Debug.Log(card.mSpriteName);
-        //     Debug.Log(card.moneyImpactNormis);
-        //     Debug.Log(card.psycheImpactNormis);
-        //     Debug.Log(card.popularityImpactNormis);
-        //     Debug.Log(card.moneyImpactMetal);
-        //     Debug.Log(card.psycheImpactMetal);
-        //     Debug.Log(card.popularityImpactMetal);
+        //     Debug.Log("Card #" + j +
+        //         Environment.NewLine + card.encounterText +
+        //         Environment.NewLine + card.eSpriteName + 
+        //         Environment.NewLine + card.normisText +
+        //         Environment.NewLine + card.nSpriteName +
+        //         Environment.NewLine + card.metalText +
+        //         Environment.NewLine + card.mSpriteName +
+        //         Environment.NewLine + card.moneyImpactNormis +
+        //         Environment.NewLine + card.psycheImpactNormis +
+        //         Environment.NewLine + card.popularityImpactNormis +
+        //         Environment.NewLine + card.moneyImpactMetal +
+        //         Environment.NewLine + card.psycheImpactMetal +
+        //         Environment.NewLine + card.popularityImpactMetal);
         //     j++;
         // }
+        return cards;
     }
 
     
