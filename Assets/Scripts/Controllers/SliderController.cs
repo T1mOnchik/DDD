@@ -45,6 +45,11 @@ public class SliderController : MonoBehaviour
         }
     }
 
+    void OnMouseDown()
+    {
+       mouseDown = true;
+    }
+
     public IEnumerator MoveSlider()
     {
         while(mouseDown == false)

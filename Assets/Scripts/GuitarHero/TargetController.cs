@@ -42,14 +42,14 @@ public class TargetController : MonoBehaviour
 
     void AddScore()
     {  
-        if(qualitySliderController.destination.x < 3f)
-        qualitySliderController.destination.x += 2;
+        if(qualitySliderController.destination.y < 14f)
+        qualitySliderController.destination.y += 4;
     }
 
     void SubtractScore()
     {  
-        if(qualitySliderController.destination.x > -3f)
-        qualitySliderController.destination.x -= 2;
+        if(qualitySliderController.destination.y > -11f)
+        qualitySliderController.destination.y -= 7;
     } 
     
 }
