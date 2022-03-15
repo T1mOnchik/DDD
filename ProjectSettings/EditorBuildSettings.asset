@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AccelerometerGame.unity
     guid: 904e5879020d2f34cada502b76c0c97f
+  - enabled: 1
+    path: Assets/Scenes/HaterFight.unity
+    guid: c5cde3d0fdcd63a4cbb4dd64380fcbb1
   m_configObjects: {}

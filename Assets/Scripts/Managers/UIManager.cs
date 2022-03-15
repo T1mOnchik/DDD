@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
         if(instance == null)
             instance = this;
 
-        canvas = GameObject.Find("Background");
+        // canvas = GameObject.Find("BottomPanel");
         mainMenu = GameObject.Find("MainMenu");
         mainMenu.GetComponent<Button>().onClick.AddListener( () => LaunchActivity(Activity.LoadGame));
     }
@@ -52,12 +52,11 @@ public class UIManager : MonoBehaviour
             GameManager.instance.RandomCard();
         }
         else if(activity == Activity.AccelerometerGame){
-            // canvas = GameObject.Find("Background");
-            canvas.SetActive(false);
-            
-            yield return SceneManager.LoadSceneAsync("AccelerometerGame", LoadSceneMode.Additive);
-            canvas.SetActive(true);
+            yield return StartCoroutine(FadeScreen(false, fadeSpeed));
+            // GameManager.instance.RandomCard();
+            yield return SceneManager.LoadSceneAsync("HaterFight", LoadSceneMode.Additive);
             GameManager.instance.RandomCard();
+            
         }
         
         yield return StartCoroutine(FadeScreen(false, fadeSpeed));

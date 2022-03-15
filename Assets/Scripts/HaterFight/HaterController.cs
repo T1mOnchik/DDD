@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HaterController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class HaterController : MonoBehaviour
     private int i = 0;
     private int winCounter = 0;
     private int deathCounter = 0;
+    private GameObject canvas;
     private int counter = 1;
     private Animator animator;
     private Vector2 velocity;
@@ -20,6 +22,7 @@ public class HaterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        canvas = GameObject.Find("Background");    
         spriteR = gameObject.GetComponent<SpriteRenderer>();
         haterObjController = transform.parent.gameObject.GetComponent<HaterObjController>();
         animator = GetComponent<Animator>();
@@ -28,6 +31,7 @@ public class HaterController : MonoBehaviour
 
     private IEnumerator DelayCoroutine()
     {
+        canvas.SetActive(false);
         yield return new WaitForSeconds(1.5f);
         targets[i-1].SetActive(false);
         TargetActivator();
@@ -59,6 +63,8 @@ public class HaterController : MonoBehaviour
             //smert
             Debug.Log("Lose");
             this.gameObject.SetActive(false);
+            canvas.SetActive(true);
+            SceneManager.UnloadSceneAsync("HaterFight");
         }
     }
     private void TargetActivator()
@@ -89,6 +95,8 @@ public class HaterController : MonoBehaviour
             //pabeda
             Debug.Log("Win");
             this.gameObject.SetActive(false);
+            canvas.SetActive(true);
+            SceneManager.UnloadSceneAsync("HaterFight");
         }
         else
         {

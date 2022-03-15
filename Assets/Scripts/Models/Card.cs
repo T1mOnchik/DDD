@@ -41,26 +41,25 @@ public class Card : MonoBehaviour
         this.popularityImpactMetal = float.Parse(data[11]);
     }
 
-    private void Start() {
+    private void OnEnable() {
         animator = transform.Find("Card").GetComponent<Animator>();
         if(!isEncounter){
-            // GameManager.instance.setActiveButtons(false);
-            // StartCoroutine(DeactivateButtons());
-            // cardPanel = GameObject.Find("CurrentCardLayer").GetComponent<Button>();
-            // cardPanel.onClick.AddListener(DestroyThis);
-            
+            cardPanel = GameObject.Find("Background").GetComponent<Button>();            
+            Debug.Log(GameObject.Find("Background").GetComponent<Button>());
             Invoke("ActivateCard", 0.7f);
+            Debug.Log("Start otrabotal: " + cardPanel);
         }
     }
 
     private void ActivateCard(){
-        cardPanel = GameObject.Find("CurrentCardLayer").GetComponent<Button>();
+        // Debug.Log(cardPanel);
         cardPanel.onClick.AddListener(DestroyThis);
     }
 
     private void DestroyThis(){
+        // Debug.Log("destr "+cardPanel.onClick);
+        cardPanel.onClick.RemoveAllListeners();
         GameManager.instance.NextCard("MoveToMetal");
-        // Destroy(gameObject);
     }
 
     public float RemoveCardAnimation(string animName){
@@ -68,8 +67,6 @@ public class Card : MonoBehaviour
             cardPanel.onClick.RemoveAllListeners();
         animator.SetTrigger(animName);
         return animator.runtimeAnimatorController.animationClips[0].length;
-        // mAnimation.Play("MoveToMetal");
-        // Debug.Log(animator.);
     }
 
 }

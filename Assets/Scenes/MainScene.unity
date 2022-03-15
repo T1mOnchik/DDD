@@ -2789,8 +2789,11 @@ MonoBehaviour:
   - 'You are sliding on your knees and playing the riff with all your feelings! '
   - 'You are playing a riff with your teeth! Can you make it? '
   - 'Time to end this! '
-  - "You are backflipping into the crowd! They throw you up and scream \u201CDDD\u201D! "
-  - 'Your guitar throws flames like a dragon! What an end! '
+  - "The crowd roars, they scream \u201CDDD\u201D! "
+  - A hater got on stage, it seems he wants to make a couple of critical arguments
+  - A hater got on stage, it seems he wants to make a couple of critical arguments
+  - Damn, looks like it was a drunk fan. Okay, throw it somewhere under the stage,
+    we need to finish the concert
   SPRITES:
   - {fileID: 7835032779756320859, guid: 6b08e2e0407cd4246ad335ad04ca623a, type: 3}
   - {fileID: 4345679706368398392, guid: 6b08e2e0407cd4246ad335ad04ca623a, type: 3}
@@ -2849,7 +2852,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: be3cae8f4eb82c44f8cb61128eddbd35, type: 3}
   - {fileID: 21300000, guid: c49223628098c134593285bb3135545e, type: 3}
   - {fileID: 21300000, guid: 8fd4656cfb8c0164f8c0e38d46a3a328, type: 3}
-  IS_ENCOUNTER: 000000000000000000000000010000010000010000010000010000010000010000010000010000010000010000010000010000010000010000
+  - {fileID: 21300000, guid: d53efdf6fcf1f85459f5d822637d4d4a, type: 3}
+  - {fileID: 21300000, guid: d53efdf6fcf1f85459f5d822637d4d4a, type: 3}
+  IS_ENCOUNTER: 0000000000000000000000000100000100000100000100000100000100000100000100000100000100000100000100000100000100000100000000
   cards: []
   moneyImage: {fileID: 0}
   psychoImage: {fileID: 0}
@@ -2874,7 +2879,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a919e0b6f4b2f2c41a1f42e693970aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 2067891191}
   slider: {fileID: 0}
   fadeSpeed: 2
 --- !u!1 &2067891191
@@ -2888,6 +2892,7 @@ GameObject:
   - component: {fileID: 2067891192}
   - component: {fileID: 2067891194}
   - component: {fileID: 2067891193}
+  - component: {fileID: 2067891195}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -2958,6 +2963,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2067891191}
   m_CullTransparentMesh: 1
+--- !u!114 &2067891195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067891191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 2067891193}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2107043520
 GameObject:
   m_ObjectHideFlags: 0
@@ -3439,6 +3488,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7431696275144192833, guid: bdba59a8dc608e14b876f57c064e15f7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7431696275144192835, guid: bdba59a8dc608e14b876f57c064e15f7, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

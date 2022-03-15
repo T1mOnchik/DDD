@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
         
         if(oldCard != null){ // Destroing previous card
             Destroy(oldCard);
-            Debug.Log(oldCard);
+            // Debug.Log(oldCard);
             oldCard = null;
             
         }
@@ -149,11 +149,11 @@ public class GameManager : MonoBehaviour
                 if(step == 54)
                     UIManager.instance.LaunchActivity(UIManager.Activity.GuitarHero);
 
-                else if(step == 55)
-                    UIManager.instance.LaunchActivity(UIManager.Activity.AccelerometerGame);
+                // else if(step == 55)
+                //     UIManager.instance.LaunchActivity(UIManager.Activity.AccelerometerGame);
 
-                else if(step == 56)
-                    UIManager.instance.LaunchActivity(UIManager.Activity.SliderGame);
+                else if(step == 57)
+                    UIManager.instance.LaunchActivity(UIManager.Activity.AccelerometerGame);
                     
                 else
                     SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
@@ -174,7 +174,6 @@ public class GameManager : MonoBehaviour
 
         //setting card's parameters
         currentCard.GetComponent<Card>().isEncounter = isEncounter;
-        Debug.Log(isEncounter);
         if(isEncounter) setActiveButtons(true);
         if(oldCard == null) setActiveButtons(false);
         else if(!isEncounter && !oldCard.GetComponent<Card>().isEncounter) setActiveButtons(false);
@@ -207,7 +206,7 @@ public class GameManager : MonoBehaviour
     public bool setActiveButtons(bool isActive){
         normisButtonObject.SetActive(isActive);
         metalButtonObject.SetActive(isActive);
-        Debug.Log("Buttons Activated: " + isActive);
+        // Debug.Log("Buttons Activated: " + isActive);
         return isActive;
     }
 
