@@ -48,14 +48,10 @@ public class SliderController : MonoBehaviour
         }
     }
 
-   
     void OnMouseDown()
     {
-        Debug.Log(Input.touchCount);
-        mouseDown = true;
+       mouseDown = true;
     }
-    
-    
 
     public IEnumerator MoveSlider()
     {
