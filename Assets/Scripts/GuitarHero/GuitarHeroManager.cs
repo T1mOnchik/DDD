@@ -6,6 +6,7 @@ public class GuitarHeroManager : MonoBehaviour
 {
     public static GuitarHeroManager instance;
     private GameObject canvas;
+    public bool result;
     [SerializeField]private float time = 58f; // time after which guitarhero will be closed
     private Coroutine eventInstance;
     public int guitarHeroScore = 0;
@@ -31,6 +32,8 @@ public class GuitarHeroManager : MonoBehaviour
         AudioManager.instance.LaunchGuitarMusicPlayer(time);
         yield return new WaitForSeconds(time);
         canvas.SetActive(true);
+        Debug.Log(result);
+        GameManager.instance.OnMinigameFinished(result);
         SceneManager.UnloadSceneAsync("GuitarHero");
         yield break;
     }

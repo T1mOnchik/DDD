@@ -41,23 +41,19 @@ public class Card : MonoBehaviour
         this.popularityImpactMetal = float.Parse(data[11]);
     }
 
-    private void OnEnable() {
+    private void Start() {
         animator = transform.Find("Card").GetComponent<Animator>();
         if(!isEncounter){
             cardPanel = GameObject.Find("Background").GetComponent<Button>();            
-            Debug.Log(GameObject.Find("Background").GetComponent<Button>());
-            Invoke("ActivateCard", 0.7f);
-            Debug.Log("Start otrabotal: " + cardPanel);
+            Invoke("ActivateCard", 0.5f);
         }
     }
 
     private void ActivateCard(){
-        // Debug.Log(cardPanel);
         cardPanel.onClick.AddListener(DestroyThis);
     }
 
     private void DestroyThis(){
-        // Debug.Log("destr "+cardPanel.onClick);
         cardPanel.onClick.RemoveAllListeners();
         GameManager.instance.NextCard("MoveToMetal");
     }

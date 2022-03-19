@@ -6,7 +6,6 @@ public class QualitySliderController : MonoBehaviour
 {
     public Vector2 destination = new Vector2(6.63f, 0);
     private Vector2 velocity;
-    public bool result;
 
     void Start()
     {
@@ -26,13 +25,12 @@ public class QualitySliderController : MonoBehaviour
        yield return new WaitForSeconds(58f);
        if(transform.localPosition.y >= 10f)
        {
-            result = true;
+            GuitarHeroManager.instance.result = true;
        }
        else
        {
-           result = false;
+           GuitarHeroManager.instance.result = false;
        }
-       Debug.Log(result);
        yield break;
    }
 }

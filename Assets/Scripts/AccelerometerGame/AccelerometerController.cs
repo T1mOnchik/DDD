@@ -9,9 +9,11 @@ public class AccelerometerController : MonoBehaviour
     private float random;
     private Vector3 sliderSize;
     private float needleBorder;
+    private GameObject background;
     // Start is called before the first frame update
     void Start()
     {
+        background = GameObject.Find("Background");
         StartCoroutine("DelayRandom");
         // sliderSize = transform.parent.GetComponent<Renderer>().bounds.size;
         // needleBorder = sliderSize.x / 2 - 0.5f;
@@ -53,6 +55,7 @@ public class AccelerometerController : MonoBehaviour
 
     private IEnumerator DelayCoroutine()
     {
+        background.SetActive(false);
         yield return new WaitForSeconds(10f);
         if(transform.localPosition.x > -0.8 && transform.localPosition.x < 0.8)
         {
@@ -62,9 +65,10 @@ public class AccelerometerController : MonoBehaviour
         {
             result = false;
         }
+        background.SetActive(true);
+        GameManager.instance.OnMinigameFinished(result);
         Debug.Log(result);
         //выход из игры
         yield break;
     }
-
 }

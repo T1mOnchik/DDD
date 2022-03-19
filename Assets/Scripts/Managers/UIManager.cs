@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,15 +9,20 @@ public class UIManager : MonoBehaviour
     public static UIManager instance = null;
     private GameObject mainMenu;
     private GameObject canvas;
+    private GameObject moneyIndicatorImage;
+    private GameObject stressIndicatorImage;
+    private GameObject popIndicatorImage;
     [SerializeField]private GameObject slider;
+    [SerializeField]private GameObject indicatorDescription;
     
     [Header("Visual Effects")]    
     [SerializeField]private int fadeSpeed = 2;
     public enum Activity{
         LoadGame,
         GuitarHero,
-        AccelerometerGame,
-        SliderGame
+        JumpGame,
+        SliderGame,
+        HaterFight
     }
 
     // Start is called before the first frame update
@@ -27,9 +33,48 @@ public class UIManager : MonoBehaviour
         if(instance == null)
             instance = this;
 
-        // canvas = GameObject.Find("BottomPanel");
+        canvas = GameObject.Find("Background");
         mainMenu = GameObject.Find("MainMenu");
+        indicatorDescription = GameObject.Find("IndicatorDescription");
+        moneyIndicatorImage = GameObject.Find("MoneyImage");
+        stressIndicatorImage = GameObject.Find("StressImage");
+        popIndicatorImage = GameObject.Find("PopImage");
+        indicatorDescription.SetActive(false);
         mainMenu.GetComponent<Button>().onClick.AddListener( () => LaunchActivity(Activity.LoadGame));
+        moneyIndicatorImage.GetComponent<Button>().onClick.AddListener(delegate{OnIndicatorClicked(0);});
+        stressIndicatorImage.GetComponent<Button>().onClick.AddListener(delegate{OnIndicatorClicked(1);});
+        popIndicatorImage.GetComponent<Button>().onClick.AddListener(delegate{OnIndicatorClicked(2);});
+        indicatorDescription.transform.Find("IndicatorDescriptionPanel").GetComponent<Button>().onClick.AddListener( () => indicatorDescription.SetActive(false) );
+    }
+
+    private void OnIndicatorClicked(int indicatorNum){
+        Sprite sprite;
+        string text;
+        switch(indicatorNum){
+
+            case 0:
+                sprite = moneyIndicatorImage.GetComponent<Image>().sprite;
+                text = "Это показатель денег.@Овациями сыт не будешь, поэтому группа всегда должна быть при деньгах,@поэтому следи, чтоб денег было не слишком мало, но и не слишком много";
+                break;
+
+            case 1:
+                sprite = stressIndicatorImage.GetComponent<Image>().sprite;
+                text = "Это показатель стресса@Стресс всегда преследует звёзд. Старайся не съехать с катушек.@Много стресса точно плохо скажется на твоем состоянии, но и чересчур расслабленным быть тоже вредно";
+                break;
+            case 2:
+                sprite = popIndicatorImage.GetComponent<Image>().sprite;
+                text = "Это показатель популярности@Без зрителей вы никому не нужны, поэтому поддерживай уровень популярности. Если он будет слишком низкий никто не будет ходить на ваши концерты и покупать мерч, а если станете слишком популярными...@ты случайно не слышал про Джона Ленона?";
+                break;
+
+            default:
+                sprite = null;
+                text = "Честно, я без понятия, что ты нажал, что это появилось, лучше напиши об этом разрабам!";
+                break;
+        }
+        indicatorDescription.SetActive(true);
+        text = text.Replace("@", Environment.NewLine);
+        indicatorDescription.transform.Find("Image").GetComponent<Image>().sprite = sprite;
+        indicatorDescription.transform.Find("Text").GetComponent<Text>().text = text;
     }
 
     public void LaunchActivity(Activity activity){
@@ -44,19 +89,18 @@ public class UIManager : MonoBehaviour
         }
         else if(activity == Activity.GuitarHero){
             yield return SceneManager.LoadSceneAsync("GuitarHero", LoadSceneMode.Additive);
-            GameManager.instance.RandomCard();
         }
         else if(activity == Activity.SliderGame){
-            yield return StartCoroutine(FadeScreen(false, fadeSpeed));
+            StartCoroutine(FadeScreen(false, fadeSpeed));
             yield return GameManager.instance.SliderGame();
-            GameManager.instance.RandomCard();
         }
-        else if(activity == Activity.AccelerometerGame){
-            yield return StartCoroutine(FadeScreen(false, fadeSpeed));
-            // GameManager.instance.RandomCard();
+        else if(activity == Activity.HaterFight){
+            StartCoroutine(FadeScreen(false, fadeSpeed));
             yield return SceneManager.LoadSceneAsync("HaterFight", LoadSceneMode.Additive);
-            GameManager.instance.RandomCard();
-            
+        }
+        else if(activity == Activity.JumpGame){
+            StartCoroutine(FadeScreen(false, fadeSpeed));
+            yield return SceneManager.LoadSceneAsync("JumpGame", LoadSceneMode.Additive);
         }
         
         yield return StartCoroutine(FadeScreen(false, fadeSpeed));

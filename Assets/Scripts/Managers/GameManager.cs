@@ -70,6 +70,8 @@ public class GameManager : MonoBehaviour
     }
 
     private void ClickButton(bool isMetalist){  // answers for this encounter: step + 1 = normis; step + 2 = metalist 
+        normisButton.enabled = false;
+        metalButton.enabled = false;
         if(!isMetalist){    // NU OCHEVIDNO ETO TUPO KOSTYLYOK NADA ISPRAVIT
             NextCard("MoveToNormis");
             normisButtonAnimator.SetTrigger("isClicked");
@@ -91,13 +93,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void NextCard(string anim){
+        
         oldCard = currentCard;
         StartCoroutine(PlayCardAnimation( anim));
         // StartCoroutine(SpawnCardAfterAnimation());
         // Debug.Log(normisButtonObject.GetComponent<Animator>().runtimeAnimatorController.animationClips[0]);
         // SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
         RandomCard();
-        // step++;
     }
 
     private IEnumerator PlayCardAnimation( string animName){
@@ -122,10 +124,6 @@ public class GameManager : MonoBehaviour
     // }
 
     public void RandomCard(){
-        // if(currentCard != null) // Destroing previous card
-        //     Destroy(currentCard);
-
-        Debug.Log("step: "+step);
         if(moneyProgressBar.current <= 0)
             SpawnCard("Not enough money", moneyImage, false);
         
@@ -146,17 +144,22 @@ public class GameManager : MonoBehaviour
         
         else{
             if(step < CARD_TEXT.Count){
-                if(step == 54)
+                if(step == 94)
                     UIManager.instance.LaunchActivity(UIManager.Activity.GuitarHero);
 
                 // else if(step == 55)
                 //     UIManager.instance.LaunchActivity(UIManager.Activity.AccelerometerGame);
 
-                else if(step == 57)
-                    UIManager.instance.LaunchActivity(UIManager.Activity.AccelerometerGame);
+                else if(step == 98)
+                    UIManager.instance.LaunchActivity(UIManager.Activity.HaterFight);
+                
+                else if(step == 104)
+                    UIManager.instance.LaunchActivity(UIManager.Activity.JumpGame);
                     
-                else
+                else{
                     SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
+                    // step++;
+                }
             }
             else
             {
@@ -164,6 +167,7 @@ public class GameManager : MonoBehaviour
             }
         }
         step++;
+        Debug.Log("step: "+step);
     }
 
     
@@ -203,31 +207,20 @@ public class GameManager : MonoBehaviour
     //     currentCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.5f, 0); // setting position on the center of the Canvas
     // }
 
-    public bool setActiveButtons(bool isActive){
+    private bool setActiveButtons(bool isActive){
+        if(isActive)
+            Invoke("ActivateButtons", 0.5f);
         normisButtonObject.SetActive(isActive);
         metalButtonObject.SetActive(isActive);
         // Debug.Log("Buttons Activated: " + isActive);
         return isActive;
     }
 
-    //             DO NOT DELETE THIS!!!
+    private void ActivateButtons(){
+        normisButton.enabled = true;
+        metalButton.enabled = true;
+    }
 
-    // public IEnumerator SliderEvant()
-    // {   
-    //     money.SetActive(false);
-    //     psyche.SetActive(false);
-    //     popularity.SetActive(false);
-    //     demonButtonObj.SetActive(false);
-    //     angelButtonObj.SetActive(false);
-    //     currentCard.SetActive(false);
-    //     sliderObj.SetActive(true);
-    //     while(sliderCheck == false)
-    //     {
-    //         yield return null; 
-    //     }
-    //     Debug.Log("222");
-    //     yield break;
-    // }
     public IEnumerator SliderGame()
     {   
         SliderController sliderController = sliderObject.GetComponent<SliderController>();
@@ -241,5 +234,18 @@ public class GameManager : MonoBehaviour
         Debug.Log(sliderGameResult);
         yield break;
     }
-    
+
+    public bool OnMinigameFinished(bool result){
+        if(result){
+            step++;
+            RandomCard();
+        }
+        else{
+            RandomCard();
+            step++;
+        }
+        
+        Debug.Log("step: "+step);
+        return result;
+    }
 }

@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/GuitarHero.unity
     guid: 25b1e2bd62ebf2444beae8e4f007bcdb
   - enabled: 1
-    path: Assets/Scenes/AccelerometerGame.unity
+    path: Assets/Scenes/JumpGame.unity
     guid: 904e5879020d2f34cada502b76c0c97f
   - enabled: 1
     path: Assets/Scenes/HaterFight.unity

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class HaterController : MonoBehaviour
+public class HaterGameManager : MonoBehaviour
 {
     [SerializeField]private List<GameObject> targets;
     [SerializeField]private List<Sprite> sprites;
@@ -64,6 +64,7 @@ public class HaterController : MonoBehaviour
             Debug.Log("Lose");
             this.gameObject.SetActive(false);
             canvas.SetActive(true);
+            GameManager.instance.OnMinigameFinished(result);
             SceneManager.UnloadSceneAsync("HaterFight");
         }
     }
@@ -96,6 +97,7 @@ public class HaterController : MonoBehaviour
             Debug.Log("Win");
             this.gameObject.SetActive(false);
             canvas.SetActive(true);
+            GameManager.instance.OnMinigameFinished(result);
             SceneManager.UnloadSceneAsync("HaterFight");
         }
         else
