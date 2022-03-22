@@ -95,33 +95,20 @@ public class GameManager : MonoBehaviour
     public void NextCard(string anim){
         
         oldCard = currentCard;
-        StartCoroutine(PlayCardAnimation( anim));
-        // StartCoroutine(SpawnCardAfterAnimation());
-        // Debug.Log(normisButtonObject.GetComponent<Animator>().runtimeAnimatorController.animationClips[0]);
-        // SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
+        StartCoroutine(PlayCardAnimation(anim));
         RandomCard();
     }
 
-    private IEnumerator PlayCardAnimation( string animName){
-        // Debug.Log(animName);
-        
+    private IEnumerator PlayCardAnimation(string animName){
         yield return new WaitForSeconds(currentCard.GetComponent<Card>().RemoveCardAnimation(animName)); // activating the card sliding animation and waiting for the end of it
         
         if(oldCard != null){ // Destroing previous card
             Destroy(oldCard);
-            // Debug.Log(oldCard);
             oldCard = null;
-            
         }
         currentCard.transform.SetParent(GameObject.Find("TopLayer").transform);
         yield break;
     }
-    // private IEnumerator SpawnCardAfterAnimation(){
-    //     normisButtonObject.GetComponent<Animator>().SetTrigger("isClicked");
-    //     yield return new WaitForSeconds(.runtimeAnimatorController.animationClips[0].length);
-    //     yield break;
-    //     // setActiveButtons(false);
-    // }
 
     public void RandomCard(){
         if(moneyProgressBar.current <= 0)
@@ -144,16 +131,16 @@ public class GameManager : MonoBehaviour
         
         else{
             if(step < CARD_TEXT.Count){
-                if(step == 94)
+                if(step == 106)
                     UIManager.instance.LaunchActivity(UIManager.Activity.GuitarHero);
 
                 // else if(step == 55)
                 //     UIManager.instance.LaunchActivity(UIManager.Activity.AccelerometerGame);
 
-                else if(step == 98)
+                else if(step == 110)
                     UIManager.instance.LaunchActivity(UIManager.Activity.HaterFight);
                 
-                else if(step == 104)
+                else if(step == 116)
                     UIManager.instance.LaunchActivity(UIManager.Activity.JumpGame);
                     
                 else{
@@ -183,7 +170,7 @@ public class GameManager : MonoBehaviour
         else if(!isEncounter && !oldCard.GetComponent<Card>().isEncounter) setActiveButtons(false);
         
         text = text.Replace("@", Environment.NewLine); // @ is an IMPORTANT symbol which says the system to ADD NEW LINE.  
-        currentCard.transform.SetParent(GameObject.Find("SpawnPoint").transform);// setting Canvas as a parent object of the card to make it visible on the UI
+        currentCard.transform.SetParent(GameObject.Find("SpawnPoint").transform); // setting Canvas as a parent object of the card to make it visible on the UI
         currentCard.GetComponentInChildren<Text>().text = text;
         
         currentCard.transform.Find("Card").transform.Find("Art").GetComponent<Image>().sprite = image;
