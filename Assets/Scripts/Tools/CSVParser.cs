@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CSVParser
 {
@@ -14,24 +15,18 @@ public class CSVParser
             Card cardModel = new Card(csvLines[i]);
             cards.Add(cardModel);
         }   
-        // int j = 0;
-        // foreach (var card in cards)
-        // { 
-        //     Debug.Log("Card #" + j +
-        //         Environment.NewLine + card.encounterText +
-        //         Environment.NewLine + card.eSpriteName + 
-        //         Environment.NewLine + card.normisText +
-        //         Environment.NewLine + card.nSpriteName +
-        //         Environment.NewLine + card.metalText +
-        //         Environment.NewLine + card.mSpriteName +
-        //         Environment.NewLine + card.moneyImpactNormis +
-        //         Environment.NewLine + card.psycheImpactNormis +
-        //         Environment.NewLine + card.popularityImpactNormis +
-        //         Environment.NewLine + card.moneyImpactMetal +
-        //         Environment.NewLine + card.psycheImpactMetal +
-        //         Environment.NewLine + card.popularityImpactMetal);
-        //     j++;
-        // }
+        int j = 0;
+        foreach (var card in cards)
+        { 
+            Debug.Log("Card #" + j +
+                Environment.NewLine + card.text +
+                Environment.NewLine + card.spriteName + 
+                Environment.NewLine + card.moneyImpact +
+                Environment.NewLine + card.psycheImpact +
+                Environment.NewLine + card.popularityImpact +
+                Environment.NewLine + card.isEncounter);
+            j++;
+        }
         return cards;
     }
 

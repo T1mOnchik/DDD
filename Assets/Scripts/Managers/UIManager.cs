@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]private int fadeSpeed = 2;
     public enum Activity{
         LoadGame,
+        QuitGame,
         GuitarHero,
         JumpGame,
         SliderGame,
@@ -102,6 +103,8 @@ public class UIManager : MonoBehaviour
             StartCoroutine(FadeScreen(false, fadeSpeed));
             yield return SceneManager.LoadSceneAsync("JumpGame", LoadSceneMode.Additive);
         }
+        else if(activity == Activity.QuitGame)
+            Application.Quit();
         
         yield return StartCoroutine(FadeScreen(false, fadeSpeed));
         yield break;
@@ -109,6 +112,8 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator FadeScreen(bool fadeToBlack, int fadeSpeed){
         GameObject fadeFrame = GameObject.Find("FadeFrame");
+        Image fadeFrameImage = fadeFrame.GetComponent<Image>(); // We make fadeFrameImage raycast target true 
+        fadeFrameImage.raycastTarget = true;                    // to block clicks on other objects until screen fade won't be finished 
         Color objectColor = fadeFrame.GetComponent<Image>().color;
         float fadeAmount;
         if(fadeToBlack){
@@ -127,6 +132,7 @@ public class UIManager : MonoBehaviour
                 yield return null;
             }
         }
+        fadeFrameImage.raycastTarget = false;                      //Here we turning on clicking on other objects
         yield break;
     }
 
