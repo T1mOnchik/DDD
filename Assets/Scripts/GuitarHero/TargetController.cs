@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class TargetController : MonoBehaviour
 { 
-    public GameObject needle;
-    public QualitySliderController qualitySliderController;
+    public GameObject slider;
+    public QualitySliderControll qualitySliderControll;
     [SerializeField]private GameObject currentCircle;
     [SerializeField]private float qualityCounter;
     [SerializeField]private bool active = false;
 
     void Start()
     {
-        qualitySliderController = needle.GetComponent<QualitySliderController>();
+        qualitySliderControll = slider.GetComponent<QualitySliderControll>();
     }
  
     void OnTriggerEnter2D(Collider2D other)
@@ -42,14 +42,14 @@ public class TargetController : MonoBehaviour
 
     void AddScore()
     {  
-        if(qualitySliderController.destination.y < 14f)
-        qualitySliderController.destination.y += 4;
+        if(qualitySliderControll.destination < 100)
+        qualitySliderControll.destination += 11f;
     }
 
     void SubtractScore()
-    {  
-        if(qualitySliderController.destination.y > -11f)
-        qualitySliderController.destination.y -= 7;
+    {   
+        if(qualitySliderControll.destination > 0)
+        qualitySliderControll.destination -= 15f;
     } 
     
 }
