@@ -1,27 +1,23 @@
 using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 using System;
 
 [Serializable]
-public class Card : MonoBehaviour
+public class Card
 {
-
-    public Button cardPanel;
-    [HideInInspector]public string text;
-    [HideInInspector]public string spriteName;
-    [HideInInspector]public int moneyImpact;
-    [HideInInspector]public int psycheImpact;
-    [HideInInspector]public int popularityImpact;
-    [HideInInspector]public bool isEncounter;
-    private Animator animator;
+    public string text;
+    public string spriteName;
+    public Sprite sprite;
+    public int moneyImpact;
+    public int psycheImpact;
+    public int popularityImpact;
+    public bool isEncounter;
+    private string defaultSpriteName = "no_image";
     
     public Card(string rowData){
         string [] data = rowData.Split(';');
-        
         try{
-            this.text = data[0];
-            this.spriteName = data[1];
+            this.text = FormatText(data[0]);
+            this.sprite = GetSpriteForCurrentCard(data[1]);
             this.moneyImpact = int.Parse(data[2]);
             this.psycheImpact = int.Parse(data[3]);
             this.popularityImpact = int.Parse(data[4]);
@@ -29,32 +25,17 @@ public class Card : MonoBehaviour
         }
         catch(Exception e){
             Debug.LogException(e);
-        }
-        
+        }   
     }
 
-    private void Start() {
-        animator = transform.Find("Card").GetComponent<Animator>();
-        if(!isEncounter){
-            cardPanel = GameObject.Find("Background").GetComponent<Button>();            
-            Invoke("ActivateCard", 0.5f);
-        }
+    private Sprite GetSpriteForCurrentCard(string name){
+        sprite = Resources.Load<Sprite>("EncounterSprites/" + name) ?? Resources.Load<Sprite>("EncounterSprites/" + defaultSpriteName); // short if null 
+        return sprite;
     }
 
-    private void ActivateCard(){
-        cardPanel.onClick.AddListener(DestroyThis);
+    private string FormatText(string text){
+        text = text.Replace("@", Environment.NewLine); // @ is an IMPORTANT symbol which says the system to ADD NEW LINE.  
+        return text;
     }
-
-    private void DestroyThis(){
-        cardPanel.onClick.RemoveAllListeners();
-        GameManager.instance.NextCard("MoveToMetal");
-    }
-
-    public float RemoveCardAnimation(string animName){
-        if(cardPanel != null)
-            cardPanel.onClick.RemoveAllListeners();
-        animator.SetTrigger(animName);
-        return animator.runtimeAnimatorController.animationClips[0].length;
-    }
-
+    
 }
