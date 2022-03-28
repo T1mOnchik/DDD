@@ -77,6 +77,7 @@ public class AudioManager : MonoBehaviour
 
     public void LaunchGuitarMusicPlayer(float time)
     {   
+        StopCoroutine("MusicPlayer");
         StartCoroutine(GuitarMusicPlayer(time));
     }
 
@@ -86,6 +87,8 @@ public class AudioManager : MonoBehaviour
         mAudio.Play();
         yield return new WaitForSeconds(time);
         isPlay = true;
+        ShuffleMusicList();
+        StartCoroutine("MusicPlayer");
         yield break;
     }
 }
