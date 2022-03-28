@@ -484,20 +484,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7645515817878305816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9868d772c05d862498506ac34185190e, type: 3}
+  m_Script: {fileID: 11500000, guid: d816f12aee69eb14f95b6175f1388d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cardPanel: {fileID: 0}
-  encounterText: 
-  normisText: 
-  metalText: 
-  eSpriteName: 
-  nSpriteName: 
-  mSpriteName: 
-  moneyImpactNormis: 0
-  moneyImpactMetal: 0
-  psycheImpactNormis: 0
-  psycheImpactMetal: 0
-  popularityImpactNormis: 0
-  popularityImpactMetal: 0
-  isEncounter: 0
+  card:
+    text: 
+    spriteName: 
+    sprite: {fileID: 0}
+    moneyImpact: 0
+    psycheImpact: 0
+    popularityImpact: 0
+    isEncounter: 0

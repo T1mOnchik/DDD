@@ -11,9 +11,9 @@ public class GameManager : MonoBehaviour
     public GameObject sliderObject;
 
     [Header("Database simulatation")] // Database simulatation
-    [SerializeField]private List<string> CARD_TEXT;
-    [SerializeField]private List<Sprite> SPRITES;
-    [SerializeField]private List<bool> IS_ENCOUNTER;
+    // [SerializeField]private List<string> CARD_TEXT;
+    // [SerializeField]private List<Sprite> SPRITES;
+    // [SerializeField]private List<bool> IS_ENCOUNTER;
     [SerializeField]private List<Card> cards;
 
     [Header("Visuals")]  // UI references
@@ -37,10 +37,12 @@ public class GameManager : MonoBehaviour
     public bool sliderCheck = false;
     
     private GameObject currentCard;
+    private GameObject oldCard;
+    private Card currentCardModel;
     [SerializeField]public int step = 0;
     [HideInInspector]public Animator normisButtonAnimator;
     [HideInInspector]public Animator metalButtonAnimator;
-    private GameObject oldCard;
+    
     
     [SerializeField]private bool sliderGameResult;
     // Start is called before the first frame update
@@ -93,14 +95,20 @@ public class GameManager : MonoBehaviour
     }
 
     public void NextCard(string anim){
-        
         oldCard = currentCard;
         StartCoroutine(PlayCardAnimation(anim));
         RandomCard();
+        ChangeProgressBarValues(currentCardModel.moneyImpact, currentCardModel.psycheImpact, currentCardModel.popularityImpact);
+    }
+
+    private void ChangeProgressBarValues(int moneyImpact, int psycheImpact, int popularityImpact){
+        moneyProgressBar.current -= moneyImpact;
+        psycheProgressBar.current -= psycheImpact;
+        popularityProgressBar.current -= popularityImpact;
     }
 
     private IEnumerator PlayCardAnimation(string animName){
-        yield return new WaitForSeconds(currentCard.GetComponent<Card>().RemoveCardAnimation(animName)); // activating the card sliding animation and waiting for the end of it
+        yield return new WaitForSeconds(currentCard.GetComponent<CardController>().RemoveCardAnimation(animName)); // activating the card sliding animation and waiting for the end of it
         
         if(oldCard != null){ // Destroing previous card
             Destroy(oldCard);
@@ -112,25 +120,31 @@ public class GameManager : MonoBehaviour
 
     public void RandomCard(){
         if(moneyProgressBar.current <= 0)
-            SpawnCard("Not enough money", moneyImage, false);
+            // SpawnCard("Not enough money", moneyImage, false);
+            end.SetActive(true);
         
         else if(moneyProgressBar.current >= 100)
-            SpawnCard("Too much money", moneyImage, false);
+            // SpawnCard("Too much money", moneyImage, false);
+            end.SetActive(true);
         
         else if(psycheProgressBar.current <= 0)
-            SpawnCard("Yeah, looks like Gregory couldn't take all that. Well, bring a new one then!", psychoImage, false);
+            // SpawnCard("Yeah, looks like Gregory couldn't take all that. Well, bring a new one then!", psychoImage, false);
+            end.SetActive(true);
         
         else if(psycheProgressBar.current >= 100)
-            SpawnCard("Gregory realized that he had been unsure of himself all this time. Now he understands that he is happy the way he is. Bad ending? Who knows...", psychoImage, false);
+            // SpawnCard("Gregory realized that he had been unsure of himself all this time. Now he understands that he is happy the way he is. Bad ending? Who knows...", psychoImage, false);
+            end.SetActive(true);
         
         else if(popularityProgressBar.current <= 0)
-            SpawnCard("So another band has sunk into oblivion. Remind me, what was it's name?", popularityImage, false);
+            // SpawnCard("So another band has sunk into oblivion. Remind me, what was it's name?", popularityImage, false);
+            end.SetActive(true);
         
         else if(popularityProgressBar.current >= 100)
-            SpawnCard("A metal band that is too popular will sooner or later turn into a piece of pop. Our fans are leaving us, my lord...", popularityImage, false);
+            // SpawnCard("A metal band that is too popular will sooner or later turn into a piece of pop. Our fans are leaving us, my lord...", popularityImage, false);
+            end.SetActive(true);
         
         else{
-            if(step < CARD_TEXT.Count){
+            if(step < cards.Count){
                 if(step == 106)
                     UIManager.instance.LaunchActivity(UIManager.Activity.GuitarHero);
 
@@ -143,10 +157,8 @@ public class GameManager : MonoBehaviour
                 else if(step == 116)
                     UIManager.instance.LaunchActivity(UIManager.Activity.JumpGame);
                     
-                else{
-                    SpawnCard(CARD_TEXT[step], SPRITES[step], IS_ENCOUNTER[step]);
-                    // step++;
-                }
+                else
+                    SpawnCard();
             }
             else
             {
@@ -157,42 +169,21 @@ public class GameManager : MonoBehaviour
         Debug.Log("step: "+step);
     }
 
-    
-
-    private GameObject SpawnCard(string text, Sprite image, bool isEncounter){ 
+    private GameObject SpawnCard(){ 
+        currentCardModel = cards[step];
         // instantiating card game object
         currentCard = Instantiate(encounterCardPrefab, new Vector3(0,0,0), Quaternion.identity);
 
         //setting card's parameters
-        currentCard.GetComponent<Card>().isEncounter = isEncounter;
-        if(isEncounter) setActiveButtons(true);
+        currentCard.GetComponent<CardController>().SetCardInfo(currentCardModel);
         if(oldCard == null) setActiveButtons(false);
-        else if(!isEncounter && !oldCard.GetComponent<Card>().isEncounter) setActiveButtons(false);
-        
-        text = text.Replace("@", Environment.NewLine); // @ is an IMPORTANT symbol which says the system to ADD NEW LINE.  
-        currentCard.transform.SetParent(GameObject.Find("SpawnPoint").transform); // setting Canvas as a parent object of the card to make it visible on the UI
-        currentCard.GetComponentInChildren<Text>().text = text;
-        
-        currentCard.transform.Find("Card").transform.Find("Art").GetComponent<Image>().sprite = image;
-        currentCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.5f, 0); // setting position on the center of the Canvas
+        if(currentCardModel.isEncounter){
+            setActiveButtons(true);
+        }
+            
+        else if(!currentCardModel.isEncounter && !oldCard.GetComponent<CardController>().card.isEncounter) setActiveButtons(false);
         return currentCard;
     }
-
-    //  private void SpawnCard(Card card){ 
-    //     if(currentCard != null) // Destroing previous card
-    //         Destroy(currentCard);
-
-    //     // instantiating card game object
-    //     GameObject toCreate = isEncounter ? encounterCardPrefab : answerCardPrefab; 
-    //     currentCard = Instantiate(toCreate, new Vector3(0,0,0), Quaternion.identity);
-
-    //     //setting card's parameters
-    //     text = text.Replace("@", Environment.NewLine); // @ is an IMPORTANT symbol which says the system to ADD NEW LINE.  
-    //     currentCard.GetComponentInChildren<Text>().text = text;
-    //     currentCard.transform.Find("Art").GetComponent<Image>().sprite = image;
-    //     currentCard.transform.SetParent(GameObject.Find("CurrentCardLayer").transform); // setting Canvas as a parent object of the card to make it visible on the UI
-    //     currentCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.5f, 0); // setting position on the center of the Canvas
-    // }
 
     private bool setActiveButtons(bool isActive){
         if(isActive)
