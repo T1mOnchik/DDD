@@ -1,0 +1,39 @@
+Text;SpriteName;MoneyImpact;psycheImpact;popularityImpact;isEncounter
+Phone: Pam param pam param...;phone;0;0;0;false
+"Gregory: ""Chief?"" ";main_character_3;0;0;0;false
+Chief: WHY AREN'T YOU AT SOUNDCHECK YET?! Concert in 2 hours!” ;shef;0;0;0;false
+"Gregory: ""WHAAAT?! But no one told me that…” ";main_character_3;0;0;0;false
+Chief: “Chill I'm just kidding, who the hell need a soundcheck? Do we look like pop-rock jerks?” ;shef;0;0;0;false
+Gregory: “…”;main_character_3;0;0;0;false
+Chief: Anyway, bring your ass here and don’t be late;shef;0;0;0;false
+"Gregory: ""But...""";main_character_3;0;0;0;false
+Phone: “Boop, boop, boop…” ;phone;0;0;0;false
+Gregory: “…”;main_character_3;0;0;0;false
+1 hour later;;0;0;0;false
+Gregory: Wow! It is really huge croud(20 drunk bodies)@Gotta figure out how to warm them up;concert;0;0;0;true
+You're trying to sing some notes with the hall. However, a crowd of drunken dead metallists is not the best choice to sing with.  ;concert;0;0;0;false
+You are furiously growl-yodeling at the crowd. That’s super effective!;concert;0;0;0;false
+You already get a taste, you start to fuck on the guitar like a mad devil;main_character_1;0;0;0;false
+"Banger time! Your main hit is ""Absolute Death"". Fans are waiting for the tooth guitar, don't screw it up!";guitar_normal;0;0;0;false
+TEETH GUITAR GAME;;0;0;0;false
+You broke almost all the strings, you Idiot!;guitathero_loss;0;0;0;false
+Yes, you did it@But what did it cost?;guitathero_win;0;0;0;false
+A hater got on the stage, it seems he wants to make a couple of critical arguments ;hater;0;0;0;false
+HATER GAME;;0;0;0;false
+He beat you to a pulp and took the microphone.@Looks like he's a new soloist now.@The world of metal is truly cruel ;fight_loss;0;0;0;false
+Damn, looks like it was a drunk fan.@K, throw it somewhere under the stage, we need to finish the concert ;fight_win;0;0;0;false
+Everything is going absolutely great!@The crowd raising their hands and chanting;concert;0;0;0;false
+"Crowd: ""DDD ... DDD ... DDD""";concert;0;0;0;false
+Wait... What are you doing?!!!;main_character_1;0;0;0;false
+JUMP GAME;;0;0;0;false
+You fell down, you were trampled on, no one even noticed your absence.;;0;0;0;false
+You were caught, but some crackpot tore out a tuft of your hair.@Hey, be happy you're still alive!;;0;0;0;false
+Some time after the perfomance;;0;0;0;false
+This. Just. Fucking cool;shef;0;0;0;false
+Listen don't you wanna join us for all the time?;shef;0;0;0;false
+And what about the previous soloist?;main_character_1;0;0;0;false
+"Oh don't worry, after 2 weeks in the hospital he said ""this job is too stressful for him""";shef;0;0;0;false
+Meh... I always knew he just a little pussy;shef;0;0;0;false
+Anyway what's your decision?;shef;0;0;0;true
+I'm sorry.. You know, this is not actually  kind of job I looked for...;main_character_3;0;0;0;false
+"Become a rock star or stay a janitor, he-he, who else has that choice""@Okay fuck it, I'm in, bitches!";main_character_1;0;0;0;false

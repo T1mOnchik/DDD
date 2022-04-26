@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Android;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,20 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public GameObject sliderObject;
 
-    [Header("Database simulatation")] // Database simulatation
-    // [SerializeField]private List<string> CARD_TEXT;
-    // [SerializeField]private List<Sprite> SPRITES;
-    // [SerializeField]private List<bool> IS_ENCOUNTER;
-    [SerializeField]private List<Card> cards;
-
-    [Header("Visuals")]  // UI references
-    [SerializeField]private Sprite moneyImage;
-    [SerializeField]private Sprite psychoImage;
-    [SerializeField]private Sprite popularityImage;
-    //    [SerializeField]private GameObject sliderObj;
-    [SerializeField]private GameObject end;
-    [SerializeField]private GameObject encounterCardPrefab;
-    [SerializeField]private GameObject answerCardPrefab;
+    private List<Card> cards;
     private GameObject normisButtonObject;
     private GameObject metalButtonObject;
     private Button normisButton;
@@ -31,10 +18,13 @@ public class GameManager : MonoBehaviour
     private ProgressBarController moneyProgressBar;
     private ProgressBarController psycheProgressBar;
     private ProgressBarController popularityProgressBar;
+    [HideInInspector]public bool sliderCheck = false;
+
+    [Header("Visual prefabs")]  // UI references
+    [SerializeField]private GameObject end;
+    [SerializeField]private GameObject encounterCardPrefab;
 
     [Space(15f)]
-
-    public bool sliderCheck = false;
     
     private GameObject currentCard;
     private GameObject oldCard;
@@ -48,12 +38,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         if(instance != this)
             Destroy(instance);
         if(instance == null)
             instance = this;
 
-        cards = new CSVParser().ConvertCSVToCards();
+        
+        cards = new CSVParser().GenerateCardsScenario(CSVParser.Language.english);
     }
 
     public void InitGame(){ 
@@ -71,10 +63,10 @@ public class GameManager : MonoBehaviour
         RandomCard();
     }
 
-    private void ClickButton(bool isMetalist){  // answers for this encounter: step + 1 = normis; step + 2 = metalist 
+    private void ClickButton(bool isMetalist){  // reaction on this encounter: step + 1 = normis; step + 2 = metalist 
         normisButton.enabled = false;
         metalButton.enabled = false;
-        if(!isMetalist){    // NU OCHEVIDNO ETO TUPO KOSTYLYOK NADA ISPRAVIT
+        if(!isMetalist){
             NextCard("MoveToNormis");
             normisButtonAnimator.SetTrigger("isClicked");
             StartCoroutine(onButtonAnimFinished(normisButtonAnimator));
@@ -102,9 +94,9 @@ public class GameManager : MonoBehaviour
     }
 
     private void ChangeProgressBarValues(int moneyImpact, int psycheImpact, int popularityImpact){
-        moneyProgressBar.current -= moneyImpact;
-        psycheProgressBar.current -= psycheImpact;
-        popularityProgressBar.current -= popularityImpact;
+        moneyProgressBar.current += moneyImpact;
+        psycheProgressBar.current += psycheImpact;
+        popularityProgressBar.current += popularityImpact;
     }
 
     private IEnumerator PlayCardAnimation(string animName){
@@ -145,16 +137,16 @@ public class GameManager : MonoBehaviour
         
         else{
             if(step < cards.Count){
-                if(step == 106)
+                if(cards[step].text == "TEETH GUITAR GAME")
                     UIManager.instance.LaunchActivity(UIManager.Activity.GuitarHero);
 
                 // else if(step == 55)
                 //     UIManager.instance.LaunchActivity(UIManager.Activity.AccelerometerGame);
 
-                else if(step == 110)
+                else if(cards[step].text == "HATER GAME")
                     UIManager.instance.LaunchActivity(UIManager.Activity.HaterFight);
                 
-                else if(step == 116)
+                else if(cards[step].text == "JUMP GAME")
                     UIManager.instance.LaunchActivity(UIManager.Activity.JumpGame);
                     
                 else
@@ -171,17 +163,19 @@ public class GameManager : MonoBehaviour
 
     private GameObject SpawnCard(){ 
         currentCardModel = cards[step];
+
         // instantiating card game object
         currentCard = Instantiate(encounterCardPrefab, new Vector3(0,0,0), Quaternion.identity);
 
         //setting card's parameters
         currentCard.GetComponent<CardController>().SetCardInfo(currentCardModel);
+        Debug.Log(currentCard);
+        Debug.Log(oldCard);
         if(oldCard == null) setActiveButtons(false);
         if(currentCardModel.isEncounter){
             setActiveButtons(true);
         }
-            
-        else if(!currentCardModel.isEncounter && !oldCard.GetComponent<CardController>().card.isEncounter) setActiveButtons(false);
+        else if(!currentCardModel.isEncounter && oldCard && !oldCard.GetComponent<CardController>().card.isEncounter) setActiveButtons(false);
         return currentCard;
     }
 
