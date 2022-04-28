@@ -8,7 +8,7 @@ public class GuitarHeroManager : MonoBehaviour
     private GameObject canvas;
     public bool result;
     [SerializeField]private float time = 59f; // time after which guitarhero will be closed
-    [SerializeField]private float winScore = 75f;
+    [SerializeField]private float winScore = 95f;
     private Coroutine eventInstance;
     public int guitarHeroScore = 0;
 
@@ -34,7 +34,7 @@ public class GuitarHeroManager : MonoBehaviour
         yield return new WaitForSeconds(time);
         CheckingResults();
         canvas.SetActive(true);
-        Debug.Log("GuitarHero: " + result);
+        // Debug.Log("GuitarHero: " + result);
         GameManager.instance.OnMinigameFinished(result);
         SceneManager.UnloadSceneAsync("GuitarHero");
         yield break;
@@ -44,8 +44,7 @@ public class GuitarHeroManager : MonoBehaviour
     {
        if(QualitySliderControll.instance.GetSliderValue() >= winScore)
             result = true;
-            // Debug.Log("slider: " + QualitySliderControll.instance.GetSliderValue());
        else
-           result = false;
+            result = false;
     }
 }

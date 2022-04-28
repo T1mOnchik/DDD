@@ -23,15 +23,17 @@ public class HaterGameManager : MonoBehaviour
     void Start()
     {
         canvas = GameObject.Find("Background");    
+        canvas.SetActive(false);
         spriteR = gameObject.GetComponent<SpriteRenderer>();
         haterObjController = transform.parent.gameObject.GetComponent<HaterObjController>();
         animator = GetComponent<Animator>();
+        
         TargetActivator();
     }
 
     private IEnumerator DelayCoroutine()
     {
-        canvas.SetActive(false);
+        
         yield return new WaitForSeconds(1.5f);
         targets[i-1].SetActive(false);
         TargetActivator();

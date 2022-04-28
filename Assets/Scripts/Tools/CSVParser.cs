@@ -9,7 +9,8 @@ public class CSVParser
         intro,  // prologue + tutorial
         random, // random event cards
         plot,
-        concert // concert cards and minigames
+        concert, // concert cards and minigames
+        lose
     }
 
     public enum Language{
@@ -24,13 +25,13 @@ public class CSVParser
     private const string RANDOM_FILENAME = @"\random";
     private const string PLOT_FILENAME = @"\plot";
     private const string CONCERT_FILENAME = @"\concert";
+    private const string LOSE_FILENAME = @"\lose";
 
     private const string RUS_FOLDERNAME = @"\russian";
     private const string ENG_FOLDERNAME = @"\english";
 
     private List<Card> ConvertCSVToCards(CardType cardType, Language language)
     {
-        // string[] csvLines = System.IO.File.ReadAllLines(@"D:\Unity\UnityProjects\DDD\Assets\Resources\script_example\Cards(rus).csv");
         string[] csvLines = GetFile(cardType, language);
         List<Card> cards = new List<Card>();
 
@@ -74,6 +75,8 @@ public class CSVParser
             path += PLOT_FILENAME;
         else if(cardType == CardType.concert)
             path += CONCERT_FILENAME;
+        else if(cardType == CardType.lose)
+            path += LOSE_FILENAME;
         else
             Debug.LogException(new Exception("Can't find " + cardType + "file name"));
 
@@ -109,6 +112,16 @@ public class CSVParser
 
         // Debug.Log(generalList);
         return generalList;
+    }
+
+    public Card GetDefeatCard(string death, Language language){
+        List<Card> loseCards = ConvertCSVToCards(CardType.lose, language);
+        foreach (Card card in loseCards)
+        {
+            if(card.spriteName == death)
+                return card;
+        }
+        return null; // заглушка: если карту не нашли, выдать запасную типо: "Тебя сбила машина"
     }
 
 }

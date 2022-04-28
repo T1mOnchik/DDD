@@ -92,15 +92,12 @@ public class UIManager : MonoBehaviour
             yield return SceneManager.LoadSceneAsync("GuitarHero", LoadSceneMode.Additive);
         }
         else if(activity == Activity.SliderGame){
-            StartCoroutine(FadeScreen(false, fadeSpeed));
             yield return GameManager.instance.SliderGame();
         }
         else if(activity == Activity.HaterFight){
-            StartCoroutine(FadeScreen(false, fadeSpeed));
             yield return SceneManager.LoadSceneAsync("HaterFight", LoadSceneMode.Additive);
         }
         else if(activity == Activity.JumpGame){
-            StartCoroutine(FadeScreen(false, fadeSpeed));
             yield return SceneManager.LoadSceneAsync("JumpGame", LoadSceneMode.Additive);
         }
         else if(activity == Activity.QuitGame)

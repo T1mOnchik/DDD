@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class QualitySliderControll : MonoBehaviour
 {
     public static QualitySliderControll instance;
-    float smoothTime = 1f;
+    float smoothTime = 0.5f;
     float yVelocity = 0.0f;
     private Slider slider;
     public float destination = 0f;
