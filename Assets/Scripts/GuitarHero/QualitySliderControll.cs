@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class QualitySliderControll : MonoBehaviour
 {
+    public static QualitySliderControll instance;
     float smoothTime = 1f;
     float yVelocity = 0.0f;
     private Slider slider;
@@ -12,8 +13,12 @@ public class QualitySliderControll : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(instance == null)
+            instance = this;
+        if(instance != this)
+            Destroy(instance);
+        
         slider = GetComponent<Slider>(); 
-        StartCoroutine("DelayCoroutine");
     }
 
     // Update is called once per frame
@@ -28,17 +33,7 @@ public class QualitySliderControll : MonoBehaviour
         slider.value = newPosition;
     }
 
-    private IEnumerator DelayCoroutine()
-    {
-       yield return new WaitForSeconds(58f);
-       if(slider.value >= 75f)
-       {
-            GuitarHeroManager.instance.result = true;
-       }
-       else
-       {
-           GuitarHeroManager.instance.result = false;
-       }
-       yield break;
+    public float GetSliderValue(){
+        return slider.value;
     }
 }

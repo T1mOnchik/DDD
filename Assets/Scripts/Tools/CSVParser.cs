@@ -18,11 +18,12 @@ public class CSVParser
     }
     
     // Resource files containing cards info
-    private const string PATH = @"D:\Unity\UnityProjects\DDD\Assets\Resources\Scenario";
-    private const string INTRO_FILENAME = @"\intro.csv";
-    private const string RANDOM_FILENAME = @"\random.csv";
-    private const string PLOT_FILENAME = @"\plot.csv";
-    private const string CONCERT_FILENAME = @"\concert.csv";
+    // private const string PATH = @"D:\Unity\UnityProjects\DDD\Assets\Resources\Scenario";
+    private const string PATH = "Scenario";
+    private const string INTRO_FILENAME = @"\intro";
+    private const string RANDOM_FILENAME = @"\random";
+    private const string PLOT_FILENAME = @"\plot";
+    private const string CONCERT_FILENAME = @"\concert";
 
     private const string RUS_FOLDERNAME = @"\russian";
     private const string ENG_FOLDERNAME = @"\english";
@@ -76,8 +77,11 @@ public class CSVParser
         else
             Debug.LogException(new Exception("Can't find " + cardType + "file name"));
 
-        string[] result = System.IO.File.ReadAllLines(path);
-        
+        string[] result;
+
+        TextAsset csv = (TextAsset)Resources.Load(path, typeof(TextAsset));
+        result = csv.text.Split('\n');
+            
         if(result == null)
             Debug.LogException(new Exception(@"Can't find \" + language +"\" + " + cardType + "file"));
 
