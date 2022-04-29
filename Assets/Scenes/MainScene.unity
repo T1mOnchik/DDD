@@ -3044,6 +3044,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliderObject: {fileID: 656665144}
   sliderCheck: 0
+  randomCardsQuantity: 16
   end: {fileID: 1705786317}
   encounterCardPrefab: {fileID: 7645515817878305816, guid: 8024a9056af85234084a228ea2fba761, type: 3}
   step: 0

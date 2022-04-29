@@ -91,10 +91,34 @@ public class CSVParser
         return result; 
     }
 
-    public List<Card> GenerateCardsScenario(Language language){
+    private List<Card> GenerateRandomCardList(Language language, int quantity){
+        List<Card> selectedRandomCards = new List<Card>();
+        List<Card> allRandomCards = ConvertCSVToCards(CardType.random, language);
+        List<int> encounterCardsIndexes = new List<int>();
+
+        for(int i = 0; i < allRandomCards.Count; i++)
+            if(allRandomCards[i].isEncounter)
+                encounterCardsIndexes.Add(i);
+
+        if(quantity > encounterCardsIndexes.Count)
+            quantity = encounterCardsIndexes.Count;
+
+        for(int i = 0; i < quantity; i++){
+            int randomIndex = UnityEngine.Random.Range(0, encounterCardsIndexes.Count - 1);
+            int cardToAddIndex = encounterCardsIndexes[randomIndex]; //getting random index from list of encounterCards 
+            encounterCardsIndexes.RemoveAt(randomIndex);
+
+            selectedRandomCards.Add(allRandomCards[cardToAddIndex]);       // adding encounter 
+            selectedRandomCards.Add(allRandomCards[cardToAddIndex + 1]);   // adding normis answer
+            selectedRandomCards.Add(allRandomCards[cardToAddIndex + 2]);   // adding metal answer
+        }   
+        return selectedRandomCards;
+    }
+
+    public List<Card> GenerateCardsScenario(Language language, int randomCardsQuantity){
         List<Card> generalList = ConvertCSVToCards(CardType.intro, language);
         
-        List<Card> random = ConvertCSVToCards(CardType.random, language);
+        
         // List<Card> plot = ConvertCSVToCards(CardType.plot, language);
 
         // int countOfRandomsBetweenPlot = (random.Count % 3) % plot.Count; // Plot and random
@@ -104,9 +128,9 @@ public class CSVParser
         //         generalList.Add(random[UnityEngine.Random.Range(0, random.Count - 1)]);
         // }
 
-        foreach(Card card in random)  // Just Random no plot
+        foreach (Card card in GenerateRandomCardList(language, randomCardsQuantity))
             generalList.Add(card);
-        
+
         foreach(Card card in ConvertCSVToCards(CardType.concert, language))
             generalList.Add(card);
 

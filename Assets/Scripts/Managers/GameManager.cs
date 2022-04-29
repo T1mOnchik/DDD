@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
     private ProgressBarController popularityProgressBar;
     [HideInInspector]public bool sliderCheck = false;
 
+    [Header("Cards")]
+    [SerializeField]private int randomCardsQuantity; // max: 29
+
+    [Space(15f)]
     [Header("Visual prefabs")]  // UI references
     [SerializeField]private GameObject end;
     [SerializeField]private GameObject encounterCardPrefab;
@@ -45,7 +49,7 @@ public class GameManager : MonoBehaviour
             instance = this;
 
         
-        cards = new CSVParser().GenerateCardsScenario(CSVParser.Language.english);
+        cards = new CSVParser().GenerateCardsScenario(CSVParser.Language.english, randomCardsQuantity);
     }
 
     public void InitGame(){ 
@@ -140,9 +144,6 @@ public class GameManager : MonoBehaviour
                 if(cards[step].text == "TEETH GUITAR GAME")
                     UIManager.instance.LaunchActivity(UIManager.Activity.GuitarHero);
 
-                // else if(step == 55)
-                //     UIManager.instance.LaunchActivity(UIManager.Activity.AccelerometerGame);
-
                 else if(cards[step].text == "HATER GAME")
                     UIManager.instance.LaunchActivity(UIManager.Activity.HaterFight);
                 
@@ -169,8 +170,6 @@ public class GameManager : MonoBehaviour
 
         //setting card's parameters
         currentCard.GetComponent<CardController>().SetCardInfo(currentCardModel);
-        Debug.Log(currentCard);
-        Debug.Log(oldCard);
         if(oldCard == null) setActiveButtons(false);
         if(currentCardModel.isEncounter){
             setActiveButtons(true);
