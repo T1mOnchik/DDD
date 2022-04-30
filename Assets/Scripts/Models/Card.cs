@@ -29,6 +29,7 @@ public class Card
         }
         catch(Exception e){
             Debug.LogException(e);
+            Debug.Log(data[0]);
         }   
     }
 

@@ -513,8 +513,6 @@ MonoBehaviour:
   currentCircle: {fileID: 0}
   qualityCounter: 0
   active: 0
-  points: 4
-  missMultiplicator: 3
 --- !u!58 &249035797
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -707,8 +705,6 @@ MonoBehaviour:
   currentCircle: {fileID: 0}
   qualityCounter: 0
   active: 0
-  points: 4
-  missMultiplicator: 3
 --- !u!58 &298388245
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1174,8 +1170,6 @@ MonoBehaviour:
   currentCircle: {fileID: 0}
   qualityCounter: 0
   active: 0
-  points: 4
-  missMultiplicator: 3
 --- !u!58 &532520453
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1731,7 +1725,8 @@ MonoBehaviour:
   result: 0
   time: 58
   winScore: 95
-  guitarHeroScore: 0
+  pointPerTap: 4
+  missMultiplicator: 3
 --- !u!4 &778817651
 Transform:
   m_ObjectHideFlags: 0

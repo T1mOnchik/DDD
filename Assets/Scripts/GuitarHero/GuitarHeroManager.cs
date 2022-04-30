@@ -7,11 +7,13 @@ public class GuitarHeroManager : MonoBehaviour
     public static GuitarHeroManager instance;
     private GameObject canvas;
     public bool result;
+    private Coroutine eventInstance;
+
     [SerializeField]private float time = 59f; // time after which guitarhero will be closed
     [SerializeField]private float winScore = 95f;
-    private Coroutine eventInstance;
-    public int guitarHeroScore = 0;
-
+    public float pointPerTap; 
+    public int missMultiplicator;
+    
     // Start is called before the first frame update
     void Start()
     {

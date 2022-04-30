@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TargetController : MonoBehaviour
@@ -9,8 +7,6 @@ public class TargetController : MonoBehaviour
     [SerializeField]private GameObject currentCircle;
     [SerializeField]private float qualityCounter;
     [SerializeField]private bool active = false;
-    [SerializeField]private float points = 4f;
-    [SerializeField]private int missMultiplicator = 3;
 
     void Start()
     {
@@ -40,18 +36,21 @@ public class TargetController : MonoBehaviour
             Destroy(currentCircle);
             AddScore();
         }
+        else{
+            SubtractScore();
+        }
     }
 
     void AddScore()
     {  
         if(qualitySliderControll.destination < 100)
-            qualitySliderControll.destination += points;
+            qualitySliderControll.destination += GuitarHeroManager.instance.pointPerTap;
     }
 
     void SubtractScore()
     {   
         if(qualitySliderControll.destination > 0)
-            qualitySliderControll.destination -= points * missMultiplicator;
+            qualitySliderControll.destination -= GuitarHeroManager.instance.pointPerTap * GuitarHeroManager.instance.missMultiplicator;
     } 
     
 }

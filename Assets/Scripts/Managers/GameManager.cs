@@ -48,8 +48,7 @@ public class GameManager : MonoBehaviour
         if(instance == null)
             instance = this;
 
-        
-        cards = new CSVParser().GenerateCardsScenario(CSVParser.Language.english, randomCardsQuantity);
+        cards = new CSVParser().GenerateCardsScenario(CSVParser.Language.russian, randomCardsQuantity);
     }
 
     public void InitGame(){ 
