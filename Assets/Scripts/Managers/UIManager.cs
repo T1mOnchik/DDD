@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     private GameObject moneyIndicatorImage;
     private GameObject stressIndicatorImage;
     private GameObject popIndicatorImage;
+    private Scene currentScene;
     [SerializeField]private GameObject slider;
     [SerializeField]private GameObject indicatorDescription;
     
@@ -23,7 +24,8 @@ public class UIManager : MonoBehaviour
         GuitarHero,
         JumpGame,
         SliderGame,
-        HaterFight
+        HaterFight,
+        Lose
     }
 
     // Start is called before the first frame update
@@ -34,6 +36,7 @@ public class UIManager : MonoBehaviour
         if(instance == null)
             instance = this;
 
+        currentScene = SceneManager.GetActiveScene();
         canvas = GameObject.Find("Background");
         mainMenu = GameObject.Find("MainMenu");
         indicatorDescription = GameObject.Find("IndicatorDescription");
@@ -88,6 +91,9 @@ public class UIManager : MonoBehaviour
             mainMenu.SetActive(false);
             GameManager.instance.InitGame();
         }
+        else if(activity == Activity.Lose)
+            SceneManager.LoadScene("MainScene");
+
         else if(activity == Activity.GuitarHero){
             yield return SceneManager.LoadSceneAsync("GuitarHero", LoadSceneMode.Additive);
         }

@@ -81,7 +81,7 @@ public class CSVParser
             Debug.LogException(new Exception("Can't find " + cardType + "file name"));
 
         string[] result;
-
+        
         TextAsset csv = (TextAsset)Resources.Load(path, typeof(TextAsset));
         result = csv.text.Split('\n');
             
@@ -140,11 +140,13 @@ public class CSVParser
 
     public Card GetDefeatCard(string death, Language language){
         List<Card> loseCards = ConvertCSVToCards(CardType.lose, language);
+        
         foreach (Card card in loseCards)
         {
-            if(card.spriteName == death)
+            if(card.sprite.name == death)
                 return card;
         }
+        Debug.Log("exit");
         return null; // заглушка: если карту не нашли, выдать запасную типо: "Тебя сбила машина"
     }
 

@@ -2,14 +2,12 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Android;
 
 public class GameManager : MonoBehaviour
 {
    
     public static GameManager instance = null;
     public GameObject sliderObject;
-
     private List<Card> cards;
     private GameObject normisButtonObject;
     private GameObject metalButtonObject;
@@ -18,6 +16,7 @@ public class GameManager : MonoBehaviour
     private ProgressBarController moneyProgressBar;
     private ProgressBarController psycheProgressBar;
     private ProgressBarController popularityProgressBar;
+    private bool isGameOver = false;
     [HideInInspector]public bool sliderCheck = false;
 
     [Header("Cards")]
@@ -28,6 +27,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]private GameObject end;
     [SerializeField]private GameObject encounterCardPrefab;
 
+    [Header("Background color on lose screen")]
+    [SerializeField]private Color32 loseBackgroundColor = new Color32(90,90,90,255);
+
     [Space(15f)]
     
     private GameObject currentCard;
@@ -36,9 +38,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]public int step = 0;
     [HideInInspector]public Animator normisButtonAnimator;
     [HideInInspector]public Animator metalButtonAnimator;
-    
-    
     [SerializeField]private bool sliderGameResult;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -114,29 +115,37 @@ public class GameManager : MonoBehaviour
     }
 
     public void RandomCard(){
-        if(moneyProgressBar.current <= 0)
-            // SpawnCard("Not enough money", moneyImage, false);
-            end.SetActive(true);
+        if(isGameOver)
+            UIManager.instance.LaunchActivity(UIManager.Activity.Lose);
+
+        if(moneyProgressBar.current <= 0){
+            isGameOver = true;
+            SpawnCard(true, "money_low");
+        }
+        else if(moneyProgressBar.current >= 100){
+            isGameOver = true;
+            SpawnCard(true, "money_high");
+        }
         
-        else if(moneyProgressBar.current >= 100)
-            // SpawnCard("Too much money", moneyImage, false);
-            end.SetActive(true);
+        else if(psycheProgressBar.current <= 0){
+            isGameOver = true;
+            SpawnCard(true, "stress_low");
+        }
         
-        else if(psycheProgressBar.current <= 0)
-            // SpawnCard("Yeah, looks like Gregory couldn't take all that. Well, bring a new one then!", psychoImage, false);
-            end.SetActive(true);
+        else if(psycheProgressBar.current >= 100){
+            isGameOver = true;
+            SpawnCard(true, "stress_high");
+        }
         
-        else if(psycheProgressBar.current >= 100)
-            // SpawnCard("Gregory realized that he had been unsure of himself all this time. Now he understands that he is happy the way he is. Bad ending? Who knows...", psychoImage, false);
-            end.SetActive(true);
+        else if(popularityProgressBar.current <= 0){
+            isGameOver = true;
+            SpawnCard(true, "popularity_low");
+        }
         
-        else if(popularityProgressBar.current <= 0)
-            // SpawnCard("So another band has sunk into oblivion. Remind me, what was it's name?", popularityImage, false);
-            end.SetActive(true);
-        
-        else if(popularityProgressBar.current >= 100)
-            // SpawnCard("A metal band that is too popular will sooner or later turn into a piece of pop. Our fans are leaving us, my lord...", popularityImage, false);
-            end.SetActive(true);
+        else if(popularityProgressBar.current >= 100){
+            isGameOver = true;
+            SpawnCard(true, "popularity_high");
+        }
         
         else{
             if(step < cards.Count){
@@ -150,7 +159,7 @@ public class GameManager : MonoBehaviour
                     UIManager.instance.LaunchActivity(UIManager.Activity.JumpGame);
                     
                 else
-                    SpawnCard();
+                    SpawnCard(false, null);
             }
             else
             {
@@ -161,8 +170,15 @@ public class GameManager : MonoBehaviour
         Debug.Log("step: "+step);
     }
 
-    private GameObject SpawnCard(){ 
-        currentCardModel = cards[step];
+    private GameObject SpawnCard(bool isLose, string death){ 
+        if(isLose){
+            currentCardModel = new CSVParser().GetDefeatCard(death, CSVParser.Language.russian);
+            GameObject.Find("Background").GetComponent<Image>().color = loseBackgroundColor;
+            Debug.Log(death);
+        }
+            
+        else
+            currentCardModel = cards[step];
 
         // instantiating card game object
         currentCard = Instantiate(encounterCardPrefab, new Vector3(0,0,0), Quaternion.identity);
@@ -191,7 +207,7 @@ public class GameManager : MonoBehaviour
         metalButton.enabled = true;
     }
 
-    public IEnumerator SliderGame()
+    public IEnumerator SliderGame()        //TO DELETE
     {   
         SliderController sliderController = sliderObject.GetComponent<SliderController>();
         sliderObject.SetActive(true);

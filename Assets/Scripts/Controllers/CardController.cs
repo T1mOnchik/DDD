@@ -40,7 +40,7 @@ public class CardController : MonoBehaviour
     }
 
     private void InitializeCardUI(){
-        this.transform.SetParent(GameObject.Find("SpawnPoint").transform); // setting Canvas as a parent object of the card to make it visible on the UI
+        this.transform.SetParent(GameObject.Find("SpawnPoint").transform); // setting Canvas as a parent object of the card to make it visible on the UI 
         GetComponentInChildren<Text>().text = card.text;
         transform.Find("Card").transform.Find("Art").GetComponent<Image>().sprite = card.sprite;
         GetComponent<RectTransform>().anchoredPosition = new Vector2(0.5f, 0); // setting position on the center of the Canvas

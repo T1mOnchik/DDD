@@ -5,7 +5,6 @@ using System;
 public class Card
 {
     public string text;
-    public string spriteName;
     public Sprite sprite;
     public int moneyImpact;
     public int psycheImpact;
@@ -18,7 +17,6 @@ public class Card
         try{
             this.text = FormatText(data[0]);
             this.sprite = GetSpriteForCurrentCard(data[1]);
-            
             if(data[2] == null || data[2] == "") data[2] = "0";
             if(data[3] == null || data[3] == "") data[3] = "0";
             if(data[4] == null || data[4] == "") data[4] = "0";
