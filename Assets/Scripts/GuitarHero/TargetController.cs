@@ -50,7 +50,10 @@ public class TargetController : MonoBehaviour
     void SubtractScore()
     {   
         if(qualitySliderControll.destination > 0)
-            qualitySliderControll.destination -= GuitarHeroManager.instance.pointPerTap * GuitarHeroManager.instance.missMultiplicator;
+            if(qualitySliderControll.destination - GuitarHeroManager.instance.pointPerTap * GuitarHeroManager.instance.missMultiplicator >= 0)
+                qualitySliderControll.destination -= GuitarHeroManager.instance.pointPerTap * GuitarHeroManager.instance.missMultiplicator;
+            else
+                qualitySliderControll.destination = 0;
     } 
     
 }

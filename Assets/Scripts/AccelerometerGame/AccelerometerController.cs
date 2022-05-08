@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AccelerometerController : MonoBehaviour
 {
@@ -15,9 +16,6 @@ public class AccelerometerController : MonoBehaviour
     {
         background = GameObject.Find("Background");
         StartCoroutine("DelayRandom");
-        // sliderSize = transform.parent.GetComponent<Renderer>().bounds.size;
-        // needleBorder = sliderSize.x / 2 - 0.5f;
-        // Debug.Log(needleBorder);
         StartCoroutine("DelayCoroutine");
     }
 
@@ -46,7 +44,6 @@ public class AccelerometerController : MonoBehaviour
     {
         while(true)
         {
-            //random = Random.Range(-sliderSize.x / 4, sliderSize.x / 4);
             random = Random.Range(-2, 2);
             yield return new WaitForSeconds(1f);
             yield return null;
@@ -67,7 +64,8 @@ public class AccelerometerController : MonoBehaviour
         }
         background.SetActive(true);
         GameManager.instance.OnMinigameFinished(result);
-        Debug.Log(result);
+        Debug.Log("Jump Game: " + result);
+        SceneManager.UnloadSceneAsync("JumpGame");
         //выход из игры
         yield break;
     }

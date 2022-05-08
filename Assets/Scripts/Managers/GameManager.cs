@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
    
     public static GameManager instance = null;
-    public GameObject sliderObject;
     private List<Card> cards;
     private GameObject normisButtonObject;
     private GameObject metalButtonObject;
@@ -17,7 +16,6 @@ public class GameManager : MonoBehaviour
     private ProgressBarController psycheProgressBar;
     private ProgressBarController popularityProgressBar;
     private bool isGameOver = false;
-    [HideInInspector]public bool sliderCheck = false;
 
     [Header("Cards")]
     [SerializeField]private int randomCardsQuantity; // max: 29
@@ -38,7 +36,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]public int step = 0;
     [HideInInspector]public Animator normisButtonAnimator;
     [HideInInspector]public Animator metalButtonAnimator;
-    [SerializeField]private bool sliderGameResult;
     
     // Start is called before the first frame update
     void Start()
@@ -92,9 +89,9 @@ public class GameManager : MonoBehaviour
 
     public void NextCard(string anim){
         oldCard = currentCard;
-        StartCoroutine(PlayCardAnimation(anim));
-        RandomCard();
         ChangeProgressBarValues(currentCardModel.moneyImpact, currentCardModel.psycheImpact, currentCardModel.popularityImpact);
+        StartCoroutine(PlayCardAnimation(anim)); // WEAK PLACE //      
+        RandomCard();                               // POTENTIAL CRASH! //
     }
 
     private void ChangeProgressBarValues(int moneyImpact, int psycheImpact, int popularityImpact){
@@ -174,7 +171,6 @@ public class GameManager : MonoBehaviour
         if(isLose){
             currentCardModel = new CSVParser().GetDefeatCard(death, CSVParser.Language.russian);
             GameObject.Find("Background").GetComponent<Image>().color = loseBackgroundColor;
-            Debug.Log(death);
         }
             
         else
@@ -189,7 +185,10 @@ public class GameManager : MonoBehaviour
         if(currentCardModel.isEncounter){
             setActiveButtons(true);
         }
-        else if(!currentCardModel.isEncounter && oldCard && !oldCard.GetComponent<CardController>().card.isEncounter) setActiveButtons(false);
+        else if(!currentCardModel.isEncounter && oldCard && !oldCard.GetComponent<CardController>().card.isEncounter) 
+            setActiveButtons(false);
+        
+        currentCard.GetComponent<RectTransform>().localScale = new Vector3(1f,1f,0f);
         return currentCard;
     }
 
@@ -198,27 +197,12 @@ public class GameManager : MonoBehaviour
             Invoke("ActivateButtons", 0.5f);
         normisButtonObject.SetActive(isActive);
         metalButtonObject.SetActive(isActive);
-        // Debug.Log("Buttons Activated: " + isActive);
         return isActive;
     }
 
     private void ActivateButtons(){
         normisButton.enabled = true;
         metalButton.enabled = true;
-    }
-
-    public IEnumerator SliderGame()        //TO DELETE
-    {   
-        SliderController sliderController = sliderObject.GetComponent<SliderController>();
-        sliderObject.SetActive(true);
-        while(!sliderController.isGameEnd)
-        {
-            yield return null;
-        }
-        sliderGameResult = sliderController.result;
-        sliderObject.SetActive(false);
-        Debug.Log(sliderGameResult);
-        yield break;
     }
 
     public bool OnMinigameFinished(bool result){

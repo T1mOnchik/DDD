@@ -23,7 +23,6 @@ public class UIManager : MonoBehaviour
         QuitGame,
         GuitarHero,
         JumpGame,
-        SliderGame,
         HaterFight,
         Lose
     }
@@ -96,9 +95,6 @@ public class UIManager : MonoBehaviour
 
         else if(activity == Activity.GuitarHero){
             yield return SceneManager.LoadSceneAsync("GuitarHero", LoadSceneMode.Additive);
-        }
-        else if(activity == Activity.SliderGame){
-            yield return GameManager.instance.SliderGame();
         }
         else if(activity == Activity.HaterFight){
             yield return SceneManager.LoadSceneAsync("HaterFight", LoadSceneMode.Additive);
