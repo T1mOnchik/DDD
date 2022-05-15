@@ -1,16 +1,16 @@
 Text;SpriteName;MoneyImpact;psycheImpact;popularityImpact;isEncounter
-Грегори: Хм… Нового уборщика еще не нашли, а сцена чертовски грязная.;main_character_3;0;0;0;True
-Да-да, драй полы сам, так солисты и делают верно?;metla;5;-5;0;False
- Ты залил грязь красной краской. Теперь сцена выглядит как место кровавой бойни. ПОТРЯСНО!;krov;-5;5;0;False
-"Басист:""У тебя руки, как у церковной пианистки… Иди и покрась ногти, не позорься!""";bassist;0;0;0;True
-Не особо разбераясь в дэд метале ты просишь девушку в салоне покрасить твои ногти в черный цвет.Оригинальности у тебя хоть отбавляй.;nogotochki;-5;0;-5;False
-"Ты просишь девушку в салоне перваратить твои руки в ""когти зверя, приносящего страх и разрушение"". Ты выходишь из салона с красно-желтыми ногтями. Кто ж знал, что её до усрачки пугает Рональд Макдональд";kogti;-5;0;5;False
-"Шеф: ""Солист был явно в лучшей форме чем он. Идите в качалку и приведите его в порядок!""";shef;0;0;0;True
-Увидя беспорядок в спортзале, ты по привычке начал мыть полы и протерать пыль. За это вам вручили абонименты на весь год. Ты явно не за этим пришел, но тоже неплохо.;metla;5;2;-10;False
-Ты понимаешь что тяжесть штанги явно для тебя непосильна. Однако вспомнив, что железо - это тоже метал, начинаешь неистово тягать его, превращая себя в дэд метал Шварнценегера.;kachalka;-5;-2;10;False
-"Грегори:""Наверное, стоит хоть послушать что-то из металла, я ведь совсем не разбираюсь в этом""";main_character_3;0;0;0;True
-Ты нашел мамину коллекцию с песнями Twisted Nipple. Я не буду этого комментировать.;;0;10;0;False
-Тебя хватило на 3 песни Cannibal Horse. Хотя даже они заставили тебя позвонить своему психотерапевту.;;0;-10;0;False
+Gregory: "Hmm... The new janitor hasn't been found yet, and the stage is dirty as hell.";main_character_3;0;0;0;True
+Yes - yes, clean the floors by yourself, this is what the soloists do, right?;metla;5;-5;0;False
+You filled all the dirt with red paint. Now the scene looks like a scene of a bloody carnage. AWESOME!;krov;-5;5;0;False
+Bassist: "Your hands are like those of a church pianist-girl... Go and paint your nails, don't embarrass yourself!";bassist;0;0;0;True
+Knowing not much about death metal, you ask the girl in the salon to paint your nails black. So original...;nogotochki;-5;0;-5;False
+You ask the girl in the salon to turn your hands into the claws of the beast, bringing fear and destruction. You leave the salon with red and yellow nails. Who knew Ronald McDonald scares the shit out of her.;kogti;-5;0;5;False
+Chief: "The previous soloist was obviously in better shape than this one. Get in the gym and get him in shape!";shef;0;0;0;True
+Seeing the mess in the gym, you begin mopping the floors and wiping the dust out of force of habit. After this, you were awarded a subscription for the whole year. You definitely didn't come for this, but this is also not so bad.;metla;5;2;-10;False
+You understand that the weight of the bar is clearly beyond your strength. However, the thought that iron is also a metal, makes you start ligting it furiously, turning yourself into death metal Schwarzenegger.;kachalka;-5;-2;10;False
+Gregory:"Maybe I need to listen to at least something from metal, I know nothing about it";main_character_3;0;0;0;True
+You found your mom's Twisted Nipple collection. I won't comment on it.;;0;10;0;False
+You were enough for 3 Cannibal Horse songs. Though even they made you call your therapist.;;0;-10;0;False
 Грегори: «Черт!@Я же не умею играть на гитаре!»;main_character_3;0;0;0;True
 Ты потратил часы времени на изучение нот и теории музыки. Дай бог ты используешь от этого 5%;ruki;0;-10;-10;False
  Ты состроил гитару так низко, что ни одно человеческое ухо не сможет отличить в этом гуле ноту. То что нужно!;guitar_blood;0;10;10;False

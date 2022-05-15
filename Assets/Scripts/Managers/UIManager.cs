@@ -43,7 +43,6 @@ public class UIManager : MonoBehaviour
         stressIndicatorImage = GameObject.Find("StressImage");
         popIndicatorImage = GameObject.Find("PopImage");
         indicatorDescription.SetActive(false);
-        mainMenu.GetComponent<Button>().onClick.AddListener( () => LaunchActivity(Activity.LoadGame));
         moneyIndicatorImage.GetComponent<Button>().onClick.AddListener(delegate{OnIndicatorClicked(0);});
         stressIndicatorImage.GetComponent<Button>().onClick.AddListener(delegate{OnIndicatorClicked(1);});
         popIndicatorImage.GetComponent<Button>().onClick.AddListener(delegate{OnIndicatorClicked(2);});
