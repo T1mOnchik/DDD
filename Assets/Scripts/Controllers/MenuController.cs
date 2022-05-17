@@ -11,6 +11,7 @@ public class MenuController : MonoBehaviour
     private bool isMenuActive = false;
     private GameObject mainMenu;
     private GameObject showMenuButtonObj;
+    private GameObject creditScreen;
 
     // [Header("Settings")]
      
@@ -24,6 +25,7 @@ public class MenuController : MonoBehaviour
         Button settingsButton = GameObject.Find("SettingsButton").GetComponent<Button>();
         Button creditsButton = GameObject.Find("CreditsButton").GetComponent<Button>();
         Button exitButton = GameObject.Find("ExitButton").GetComponent<Button>();
+        creditScreen = GameObject.Find("Credits");
 
         //settings
         Button menuLayoutButton = GameObject.Find("MenuLayout").GetComponent<Button>();
@@ -35,17 +37,20 @@ public class MenuController : MonoBehaviour
         menuLayoutOfInteract = GameObject.Find("MenuLayout").GetComponent<Image>();
         settingsMenu = GameObject.Find("Settings");
 
-        startButton.GetComponent<Button>().onClick.AddListener( () => {
+        startButton.onClick.AddListener( () => {
             UIManager.instance.LaunchActivity(UIManager.Activity.LoadGame);
             showMenuButtonObj.SetActive(true);
             });
-        settingsButton.GetComponent<Button>().onClick.AddListener(ShowHideMenu);
-        // creditsButton.
-        exitButton.GetComponent<Button>().onClick.AddListener(ExitGame);
-
+        settingsButton.onClick.AddListener(ShowHideMenu);
+        creditsButton.onClick.AddListener(() => ShowHideCredits(true));
+        creditScreen.GetComponent<Button>().onClick.AddListener(() => ShowHideCredits(false));
+        exitButton.onClick.AddListener(ExitGame);
+        
         showMenuButton.onClick.AddListener(ShowHideMenu);
         menuLayoutButton.onClick.AddListener(() => { if(isMenuActive) ShowHideMenu(); });
         returnButton.onClick.AddListener(ShowHideMenu);
+
+        creditScreen.SetActive(false);
         settingsMenu.SetActive(false);
         menuLayoutOfInteract.raycastTarget = false;
     }
@@ -54,6 +59,10 @@ public class MenuController : MonoBehaviour
         settingsMenu.SetActive(!isMenuActive);
         isMenuActive = !isMenuActive;
         menuLayoutOfInteract.raycastTarget = isMenuActive;
+    }
+
+    private void ShowHideCredits(bool isActive){
+        creditScreen.SetActive(isActive);
     }
 
     private void ExitGame(){
