@@ -2999,6 +2999,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_Options.m_Options.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[1].m_Text
+      value: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[2].m_Text
+      value: "\u0423\u043A\u0440\u0430\u0457\u043D\u0441\u044C\u043A\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}

@@ -32,6 +32,7 @@ public class CSVParser
 
     private const string RUS_FOLDERNAME = @"\russian";
     private const string ENG_FOLDERNAME = @"\english";
+    private const string UA_FOLDERNAME = @"\ukrainian";
 
     public List<Card> GenerateCardsScenario(Language language, int randomCardsQuantity){
         List<Card> generalList = ConvertCSVToCards(Type.intro, language);
@@ -97,7 +98,7 @@ public class CSVParser
             string [] data = s.Split(';');
 
             if(data[0] == "Id") continue;
-            
+
             try{
                 if(int.Parse(data[0]) == id)
                     return new Card(s);
@@ -130,6 +131,8 @@ public class CSVParser
             path += RUS_FOLDERNAME;
         else if(language == Language.english)
             path += ENG_FOLDERNAME;
+        else if(language == Language.ukrainian)
+            path += UA_FOLDERNAME;
         else{
             Debug.LogException(new Exception("Can't find " + language + " language folder name"));
             path += ENG_FOLDERNAME;

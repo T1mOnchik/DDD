@@ -77,6 +77,10 @@ public class GameManager : MonoBehaviour
                 language = CSVParser.Language.russian;
             break;
 
+            case 2:
+                language = CSVParser.Language.ukrainian;
+            break;
+
             default:
                 language = CSVParser.Language.english;
             break;
