@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance = null;
     private GameObject mainMenu;
+    private GameObject menu;
     private GameObject canvas;
     private GameObject moneyIndicatorImage;
     private GameObject stressIndicatorImage;
@@ -38,6 +39,7 @@ public class UIManager : MonoBehaviour
         currentScene = SceneManager.GetActiveScene();
         canvas = GameObject.Find("Background");
         mainMenu = GameObject.Find("MainMenu");
+        menu = GameObject.Find("MenuLayout");
         indicatorDescription = GameObject.Find("IndicatorDescription");
         moneyIndicatorImage = GameObject.Find("MoneyImage");
         stressIndicatorImage = GameObject.Find("StressImage");
@@ -47,6 +49,7 @@ public class UIManager : MonoBehaviour
         stressIndicatorImage.GetComponent<Button>().onClick.AddListener(delegate{OnIndicatorClicked(1);});
         popIndicatorImage.GetComponent<Button>().onClick.AddListener(delegate{OnIndicatorClicked(2);});
         indicatorDescription.transform.Find("IndicatorDescriptionPanel").GetComponent<Button>().onClick.AddListener( () => indicatorDescription.SetActive(false) );
+        // ApplyLanguagePack(CSVParser.Language.english); //default interface language
     }
 
     private void OnIndicatorClicked(int indicatorNum){
@@ -65,7 +68,7 @@ public class UIManager : MonoBehaviour
                 break;
             case 2:
                 sprite = popIndicatorImage.GetComponent<Image>().sprite;
-                text = "Это показатель популярности@Без зрителей вы никому не нужны, поэтому поддерживай уровень популярности. Если он будет слишком низкий никто не будет ходить на ваши концерты и покупать мерч, а если станете слишком популярными...@ты случайно не слышал про Джона Ленона?";
+                text = "Это показатель популярности@Без зрителей вы никому не нужны, поэтому поддерживай уровень популярности. Если он будет слишком низкий никто не будет ходить на ваши концерты и покупать мерч, а если станете слишком популярными...@ты же слышал про Джона Ленона?";
                 break;
 
             default:
@@ -81,6 +84,10 @@ public class UIManager : MonoBehaviour
 
     public void LaunchActivity(Activity activity){
         StartCoroutine(LaunchActivityCoroutine(activity));
+    }
+
+    public void ApplyLanguagePack(CSVParser.Language language){
+        menu.GetComponent<MenuController>().ApplyLanguagePack(language);
     }
 
     private IEnumerator LaunchActivityCoroutine(Activity activity){

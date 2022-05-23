@@ -13,25 +13,31 @@ public class MenuController : MonoBehaviour
     private GameObject showMenuButtonObj;
     private GameObject creditScreen;
 
-    // [Header("Settings")]
-     
+    private Button startButton;
+    private Button settingsButton;
+    private Button creditsButton;
+    private Button exitButton;
+    private Button returnButton;
+    private Text musicVolumeLabel;
+    private Text effectsVolumeLabel;
+    private Text languageLabel;
 
     // Start is called before the first frame update
     void Start()
     {
         //main menu
         mainMenu = GameObject.Find("MainMenu");
-        Button startButton = GameObject.Find("StartButton").GetComponent<Button>();
-        Button settingsButton = GameObject.Find("SettingsButton").GetComponent<Button>();
-        Button creditsButton = GameObject.Find("CreditsButton").GetComponent<Button>();
-        Button exitButton = GameObject.Find("ExitButton").GetComponent<Button>();
+        startButton = GameObject.Find("StartButton").GetComponent<Button>();
+        settingsButton = GameObject.Find("SettingsButton").GetComponent<Button>();
+        creditsButton = GameObject.Find("CreditsButton").GetComponent<Button>();
+        exitButton = GameObject.Find("ExitButton").GetComponent<Button>();
         creditScreen = GameObject.Find("Credits");
 
         //settings
         Button menuLayoutButton = GameObject.Find("MenuLayout").GetComponent<Button>();
         showMenuButtonObj = GameObject.Find("ShowMenuButton");
         Button showMenuButton = showMenuButtonObj.GetComponent<Button>();
-        Button returnButton = GameObject.Find("Return").GetComponent<Button>();
+        returnButton = GameObject.Find("Return").GetComponent<Button>();
         showMenuButtonObj.SetActive(false);
         
         menuLayoutOfInteract = GameObject.Find("MenuLayout").GetComponent<Image>();
@@ -53,6 +59,18 @@ public class MenuController : MonoBehaviour
         creditScreen.SetActive(false);
         settingsMenu.SetActive(false);
         menuLayoutOfInteract.raycastTarget = false;
+    }
+
+    public void ApplyLanguagePack(CSVParser.Language language){
+        Dictionary<string, string> strings = new CSVParser().GetUserInterfaceStrings(language);
+        startButton.GetComponentInChildren<Text>().text = strings["StartButton"];
+        settingsButton.GetComponentInChildren<Text>().text = strings["SettingsButton"];
+        creditsButton.GetComponentInChildren<Text>().text = strings["CreditsButton"];
+        exitButton.GetComponentInChildren<Text>().text = strings["ExitButton"];
+        returnButton.GetComponentInChildren<Text>().text = strings["ReturnLabel"];
+        GameObject.Find("MusicVolumeLabel").GetComponent<Text>().text = strings["MusicLabel"];
+        GameObject.Find("EffectsVolumeLabel").GetComponent<Text>().text = strings["EffectsLabel"];
+        GameObject.Find("LanguageLabel").GetComponent<Text>().text = strings["LanguageLabel"];
     }
 
     private void ShowHideMenu(){

@@ -1,39 +1,40 @@
-Text;SpriteName;MoneyImpact;psycheImpact;popularityImpact;isEncounter
-Phone: Ring Ring Ring Ring...;phone;0;0;0;false
-"Gregory: ""Chief?"" ";main_character_3;0;0;0;false
-Chief: WHY AREN'T YOU AT SOUNDCHECK YET?! Concert in 2 hours!” ;shef;0;0;0;false
-"Gregory: ""WHAAAT?! But no one told me that…” ";main_character_3;0;0;0;false
-Chief: “Chill I'm just kidding, who the hell need a soundcheck? Do we look like pop-rock jerks?” ;shef;0;0;0;false
-Gregory: “…”;main_character_3;0;0;0;false
-Chief: Anyway, bring your ass here and don’t be late;shef;0;0;0;false
-"Gregory: ""But...""";main_character_3;0;0;0;false
-Phone: “Boop, boop, boop…” ;phone;0;0;0;false
-Gregory: “…”;main_character_3;0;0;0;false
-1 hour later;;0;0;0;false
-Gregory: Wow! It is really huge croud(20 drunk bodies)@Gotta figure out how to warm them up;concert;0;0;0;true
-You're trying to sing some notes with the hall. However, a crowd of drunken dead metallists is not the best choice to sing with.  ;concert;0;0;0;false
-You are furiously growl-yodeling at the crowd. That’s super effective!;concert;0;0;0;false
-You already get a taste, you start to fuck on the guitar like a mad devil;main_character_1;0;0;0;false
-"Banger time! Your main hit is ""Absolute Death"". Fans are waiting for the tooth guitar, don't screw it up!";guitar_normal;0;0;0;false
-TEETH GUITAR GAME;;0;0;0;false
-You broke almost all the strings, you Idiot!;guitathero_loss;0;0;0;false
-Yes, you did it@But what did it cost?;guitathero_win;0;0;0;false
-A hater got on the stage, it seems he wants to make a couple of critical arguments ;hater;0;0;0;false
-HATER GAME;;0;0;0;false
-He beat you to a pulp and took the microphone.@Looks like he's a new soloist now.@The world of metal is truly cruel ;fight_loss;0;0;0;false
-Damn, looks like it was a drunk fan.@K, throw it somewhere under the stage, we need to finish the concert ;fight_win;0;0;0;false
-Everything is going absolutely great!@The crowd raising their hands and chanting;concert;0;0;0;false
-"Crowd: ""DDD ... DDD ... DDD""";concert;0;0;0;false
-Wait... What are you doing?!!!;main_character_1;0;0;0;false
-JUMP GAME;;0;0;0;false
-You fell down, you were trampled on, no one even noticed your absence.;;0;0;0;false
-You were caught, but some crackpot tore out a tuft of your hair.@Hey, be happy you're still alive!;;0;0;0;false
-Some time after the perfomance;;0;0;0;false
-This. Just. Fucking cool;shef;0;0;0;false
-Listen don't you wanna join us for all the time?;shef;0;0;0;false
-And what about the previous soloist?;main_character_1;0;0;0;false
-"Oh don't worry, after 2 weeks in the hospital he said ""this job is too stressful for him""";shef;0;0;0;false
-Meh... I always knew he just a little pussy;shef;0;0;0;false
-Anyway what's your decision?;shef;0;0;0;true
-I'm sorry.. You know, this is not actually  kind of job I looked for...;main_character_3;0;0;0;false
-"Become a rock star or stay a janitor, he-he, who else has that choice""@Okay fuck it, I'm in, bitches!";main_character_1;0;0;0;false
+Id;Text;SpriteName;MoneyImpact;psycheImpact;popularityImpact;isEncounter
+313;Phone: Ring Ring Ring Ring...;phone;0;0;0;false
+314;"Gregory: ""Chief?"" ";main_character_3;0;0;0;false
+315;Chief: WHY AREN'T YOU AT SOUNDCHECK YET?! Concert in 2 hours!”;shef;0;0;0;false
+316;"Gregory: ""WHAAAT?! But no one told me that…” ";main_character_3;0;0;0;false
+317;Chief: “Chill I'm just kidding, who the hell need a soundcheck? Do we look like pop-rock jerks?” ;shef;0;0;0;false
+318;Gregory: “…”;main_character_3;0;0;0;false
+319;Chief: Anyway, bring your ass here and don’t be late;shef;0;0;0;false
+320;"Gregory: ""But...""";main_character_3;0;0;0;false
+321;Phone: “Boop, boop, boop…” ;phone;0;0;0;false
+322;Gregory: “…”;main_character_3;0;0;0;false
+323;Gregory: “Fuck…”;main_character_3;0;0;0;false
+324;1 hour later;;0;0;0;false
+325;Gregory: Wow! It is really huge croud(20 drunk bodies)@Gotta figure out how to warm them up;concert;0;0;0;true
+326;You're trying to sing some notes with the hall. However, a crowd of drunken dead metallists is not the best choice to sing with.  ;concert;0;0;0;false
+327;You are furiously growl-yodeling at the crowd. That’s super effective!;concert;0;0;0;false
+328;You already get a taste, you start to fuck on the guitar like a mad devil;main_character_1;0;0;0;false
+329;"Banger time! Your main hit is ""Absolute Death"". Fans are waiting for the tooth guitar, don't screw it up!";guitar_normal;0;0;0;false
+330;TEETH GUITAR GAME;;0;0;0;false
+331;You broke almost all the strings, you Idiot!;guitathero_loss;0;0;0;false
+332;Yes, you did it@But what did it cost?;guitathero_win;0;0;0;false
+333;A hater got on the stage, it seems he wants to make a couple of critical arguments ;hater;0;0;0;false
+334;HATER GAME;;0;0;0;false
+335;He beat you to a pulp and took the microphone.@Looks like he's a new soloist now.@The world of metal is truly cruel ;fight_loss;0;0;0;false
+336;Damn, looks like it was a drunk fan.@K, throw it somewhere under the stage, we need to finish the concert ;fight_win;0;0;0;false
+337;Everything is going absolutely great!@The crowd raising their hands and chanting;concert;0;0;0;false
+338;"Crowd: ""DDD ... DDD ... DDD""";concert;0;0;0;false
+339;Wait... What are you doing?!!!;main_character_1;0;0;0;false
+340;JUMP GAME;;0;0;0;false
+341;You fell down, you were trampled on, no one even noticed your absence.;;0;0;0;false
+342;You were caught, but some crackpot tore out a tuft of your hair.@Hey, be happy you're still alive!;;0;0;0;false
+343;Some time after the perfomance;;0;0;0;false
+344;This. Just. Fucking cool;shef;0;0;0;false
+345;Listen don't you wanna join us for all the time?;shef;0;0;0;false
+346;And what about the previous soloist?;main_character_1;0;0;0;false
+347;"Oh don't worry, after 2 weeks in the hospital he said ""this job is too stressful for him""";shef;0;0;0;false
+348;Meh... I always knew he just a little pussy;shef;0;0;0;false
+349;Anyway what's your decision?;shef;0;0;0;true
+350;I'm sorry.. You know, this is not actually  kind of job I looked for...;main_character_3;0;0;0;false
+351;"Become a rock star or stay a janitor, he-he, who else has that choice""@Okay fuck it, I'm in, bitches!";main_character_1;0;0;0;false

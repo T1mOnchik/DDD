@@ -4,6 +4,7 @@ using System;
 [Serializable]
 public class Card
 {
+    public int id;
     public string text;
     public Sprite sprite;
     public int moneyImpact;
@@ -15,15 +16,16 @@ public class Card
     public Card(string rowData){
         string [] data = rowData.Split(';');
         try{
-            this.text = FormatText(data[0]);
-            this.sprite = GetSpriteForCurrentCard(data[1]);
-            if(data[2] == null || data[2] == "") data[2] = "0";
-            if(data[3] == null || data[3] == "") data[3] = "0";
-            if(data[4] == null || data[4] == "") data[4] = "0";
-            this.moneyImpact = int.Parse(data[2]);
-            this.psycheImpact = int.Parse(data[3]);
-            this.popularityImpact = int.Parse(data[4]);
-            this.isEncounter = bool.Parse(data[5]);
+            this.id = int.Parse(data[0]);
+            this.text = FormatText(data[1]);
+            this.sprite = GetSpriteForCurrentCard(data[2]);
+            if(data[2] == null || data[3] == "") data[3] = "0";
+            if(data[3] == null || data[4] == "") data[4] = "0";
+            if(data[4] == null || data[5] == "") data[5] = "0";
+            this.moneyImpact = int.Parse(data[3]);
+            this.psycheImpact = int.Parse(data[4]);
+            this.popularityImpact = int.Parse(data[5]);
+            this.isEncounter = bool.Parse(data[6]);
         }
         catch(Exception e){
             Debug.LogException(e);

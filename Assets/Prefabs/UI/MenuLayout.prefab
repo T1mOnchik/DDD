@@ -722,6 +722,18 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2001328259728089272, guid: d6a5db420bce5464d891ad28fa93008f, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2001328259728089272, guid: d6a5db420bce5464d891ad28fa93008f, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2001328259728089272, guid: d6a5db420bce5464d891ad28fa93008f, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3005356582692605107, guid: d6a5db420bce5464d891ad28fa93008f, type: 3}
       propertyPath: m_FontData.m_MinSize
       value: 2

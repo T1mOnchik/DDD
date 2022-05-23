@@ -1,0 +1,7 @@
+Id;Text;SpriteName;MoneyImpact;psycheImpact;popularityImpact;isEncounter
+901;Well, looks like Gregory couldn't take all that. Well, bring a new one then!;stress_high;;;;false
+902;Gregory realized that he had been unsure of himself all this time. Now he understands that he is happy the way he is. Bad ending? Who knows...;stress_low;;;;false
+903;A metal band that is too popular will sooner or later turn into a piece of pop. Our fans are leaving us, my lord...;popularity_high;;;;false
+904;So another band has sunk into oblivion. Remind me, what was it's name?;popularity_low;;;;false
+905;Your income has made you the second economic power in the world.@Unfortunately, the government had to get rid of you.;money_high;;;;false
+906;Hunger and debt forced Gregory to leave the group and sell himself.;money_low;;;;false

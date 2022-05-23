@@ -746,7 +746,7 @@ GameObject:
   - component: {fileID: 322201827}
   - component: {fileID: 322201826}
   m_Layer: 5
-  m_Name: Logo
+  m_Name: MainMenuBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2998,6 +2998,66 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2028837202}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2028837202}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GetLanguagePack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: GetLanguagePack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846622992675209944, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4441819682012573416, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3162,6 +3222,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4441819682692733241, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_Name
+      value: MusicVolumeLabel
+      objectReference: {fileID: 0}
     - target: {fileID: 4441819683191072921, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
       propertyPath: m_Name
       value: ExitButton
@@ -3225,6 +3289,14 @@ PrefabInstance:
     - target: {fileID: 8501757503471940747, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708843445978064933, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_Name
+      value: LanguageLabel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8966286949413524950, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_Name
+      value: EffectsVolumeLabel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}

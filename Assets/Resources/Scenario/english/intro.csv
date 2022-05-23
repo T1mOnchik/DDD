@@ -1,25 +1,30 @@
-Text;SpriteName;MoneyImpact;psycheImpact;popularityImpact;isEncounter
-My life has been the same for the last 5 years.@ My name is Gregory and I work as a janitor in a concert hall@ That day started as usual. I was washing the scene for some death metal group and after that… ;main_character_2;;;;false
-Everything changed.;main_character_1;;;;false
-*Talking on the phone* He… WHAT?!?!?@No, I hear you, I mean…@He will be alright in a week or something, right?@A MONTH?!?!?@Listen, there must be something we can…@Hello? HELLO??;shef;;;;false
-Listen, there must be something we can… Hello? HELLO??@Shit.@Hey, you. ;shef;;;;false
-…? ;main_character_3;;;;false
-Yeah, you.@Can you scream really loud and scary? ;shef;;;;false
-I… I used to cry a lot as a kid… My brothers often bullied me. ;main_character_3;;;;false
-Meh… It’ll do. Come here.;shef;;;;false
-What the…;main_character_1;;;;false
-Cool, right?!@Our soloist has got into an accident and now you will replace him. I'll introduce you to the band. We need to do a lot of work so you won’t disappoint me. And be sure. You don’t wanna see me disappointed. ;shef;;;;false
-*Gulp*;main_character_1;;;;false
-Ok, see you later!;shef;;;;false
-Wait buddy;logo2;;;;false
-Became a star and don't know what to do? Don't piss, now I'll tell you how it all works.;logo2;;;;false
-As frontman of the death metal band, you'll need to make a bunch of important choices.;logo2;;;;false
-Your choices will affect your performance.;logo2;;;;false
-You can't eat applause, so the band should always be with money.;money;;;;false
-Stress always haunts the stars. Try not to get cranky.;stress;;;;false
-Nobody needs you without fans, so maintain your level of popularity.;popularity;;;;false
-You can make a choice by pressing one of your fingers.;logo2;;;;false
-Clicking on a human finger you will act just like normis.;angel_button;;;;false
-By pressing on the awesome, metal skeletons finger, you will release your dark essence to perform your tasks.;demon_button;;;;false
-But be careful, you never know in advance what exactly will happen with your choice, so think before you act.;logo2;;;;false
-Well, that's all for now. The concert is coming soon, try not to break up the band until then!;jump_into_the_croud;;;;false
+Id;Text;SpriteName;MoneyImpact;psycheImpact;popularityImpact;isEncounter
+1;Gregory: «My life has been the same for the last 5 years.@ My name is Gregory and I work as a janitor in a concert hall@That day has started as usual.»;main_character_2;;;;false
+2;Gregory: «I was just washing the scene for some death metal group and then…»;main_character_2;;;;false
+3;Gregory: «Everything has changed.»;main_character_1;;;;false
+4;Chief of the metal band: *Talking on the phone*@«He… WHAT?!?!?@No, I hear you, I mean…He will be alright in a week or something, right?@A MONTH?!?!?»;shef;;;;false
+5;Chief of the metal band: «He will be alright in a week or something, right?@A MONTH?!?!?»;shef;;;;false
+6;Chief of the metal band: «Listen, there must be something we can… Hello? HELLO??@Shit.»;shef;;;;false
+7;Chief of the metal band: «Hey, you.»;shef;;;;false
+8;Gregory: …? ;main_character_3;;;;false
+9;Chief of the metal band: «Yeah, you.@Can you scream really loud and scary?»;shef;;;;false
+10;Gregory: «I… I used to cry a lot as a kid… My brothers often bullied me.»;main_character_3;;;;false
+11;Chief of the metal band: «Meh… It’ll do. Come here.»;shef;;;;false
+12;Chief of the metal band: «Lemme do something,@wait a second... a little bit more…@Done!»;shef;;;;false
+13;Gregory: «What the F…»;main_character_1;;;;false
+14;Chief of the metal band: «Cool, right?!@Our soloist has got into an accident and now you will replace him.»;shef;;;;false
+15;Chief of the metal band: «I'll introduce you to the band. We need to do a lot of work so you won’t disappoint me. And be sure. You don’t wanna see me disappointed.»;shef;;;;false
+16;Gregory: *Gulp*;main_character_1;;;;false
+17;Chief of the metal band: «Ok, see you later!»;shef;;;;false
+18;Wait buddy;logo2;;;;false
+19;Became a star and don't know what to do? Don't piss, now I'll tell you how it all works.;logo2;;;;false
+20;As frontman of the death metal band, you'll need to make a bunch of important choices.;logo2;;;;false
+21;Your choices will affect your performance.;logo2;;;;false
+22;You can't eat applause, so the band should always be with money.;money;;;;false
+23;Stress always haunts the stars. Try not to get cranky.;stress;;;;false
+24;Nobody needs you without fans, so maintain your level of popularity.;popularity;;;;false
+25;You can make a choice by pressing one of your fingers.;logo2;;;;false
+26;Clicking on a human finger you will act just like normis.;angel_button;;;;false
+27;By pressing on the awesome, metal skeletons finger, you will release your dark essence to perform your tasks.;demon_button;;;;false
+28;But be careful, you never know in advance what exactly will happen with your choice, so think before you act.;logo2;;;;false
+29;Well, that's all for now. The concert is coming soon, try not to break up the band until then!;jump_into_the_croud;;;;false

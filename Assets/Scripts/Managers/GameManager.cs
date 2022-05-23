@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private GameObject metalButtonObject;
     private Button normisButton;
     private Button metalButton;
+    // private GameObject menu;    // ??????????????????????????????????
     private ProgressBarController moneyProgressBar;
     private ProgressBarController psycheProgressBar;
     private ProgressBarController popularityProgressBar;
@@ -45,11 +46,14 @@ public class GameManager : MonoBehaviour
             Destroy(instance);
         if(instance == null)
             instance = this;
-
-        cards = new CSVParser().GenerateCardsScenario(CSVParser.Language.russian, randomCardsQuantity);
+            
+        // menu = GameObject.Find("MenuLayout");   // ???????????????????????????????????
+        cards = new CSVParser().GenerateCardsScenario(CSVParser.Language.english, randomCardsQuantity); //default language(english)
+        // GetLanguagePack(0); //default language(english)
     }
 
     public void InitGame(){ 
+        
         normisButtonObject = GameObject.Find("NormisButton");
         metalButtonObject = GameObject.Find("MetalButton");
         moneyProgressBar = GameObject.Find("Money").GetComponent<ProgressBarController>();
@@ -61,8 +65,34 @@ public class GameManager : MonoBehaviour
         metalButton.onClick.AddListener( () => ClickButton(true) );
         normisButtonAnimator = normisButtonObject.GetComponent<Animator>();
         metalButtonAnimator = metalButtonObject.GetComponent<Animator>();
+       
         RandomCard();
     }
+
+    public void GetLanguagePack(int languageID){
+        CSVParser.Language language;
+        switch (languageID){
+            case 0:
+                language = CSVParser.Language.english;
+            break;
+
+            case 1:
+                language = CSVParser.Language.russian;
+            break;
+
+            default:
+                language = CSVParser.Language.english;
+            break;
+        }
+        // cards = new CSVParser().GenerateCardsScenario(language, randomCardsQuantity); //ISSUE - WE REGENERATE SCENARIO EVERY TIME WE CHANGE LANGUAGE
+        cards = new CSVParser().SwitchCardsLanguage(language, cards);
+        if(step != 0){
+            currentCard.GetComponent<CardController>().SetCardInfo(cards[step-1]);
+        }
+        UIManager.instance.ApplyLanguagePack(language);
+    }
+
+    
 
     private void ClickButton(bool isMetalist){  // reaction on this encounter: step + 1 = normis; step + 2 = metalist 
         normisButton.enabled = false;
@@ -177,12 +207,12 @@ public class GameManager : MonoBehaviour
             currentCardModel = cards[step];
 
         // instantiating card game object
-        currentCard = Instantiate(encounterCardPrefab, new Vector3(0,0,0), Quaternion.identity);
+        currentCard = Instantiate(encounterCardPrefab, new Vector3(0,0,0), Quaternion.identity); // spawning card game object prefab
 
         //setting card's parameters
-        currentCard.GetComponent<CardController>().SetCardInfo(currentCardModel);
-        if(oldCard == null) setActiveButtons(false);
-        if(currentCardModel.isEncounter){
+        currentCard.GetComponent<CardController>().InitCard(currentCardModel); // inflating card gameobject by information from the model (setting UI, activate/disactivate buttons)
+        if(oldCard == null) setActiveButtons(false);                                      
+        if(currentCardModel.isEncounter){                                      // depending on is card an encounter, we activate/disactivate "fingers" buttons
             setActiveButtons(true);
         }
         else if(!currentCardModel.isEncounter && oldCard && !oldCard.GetComponent<CardController>().card.isEncounter) 
@@ -192,17 +222,12 @@ public class GameManager : MonoBehaviour
         return currentCard;
     }
 
-    private bool setActiveButtons(bool isActive){
+    private bool setActiveButtons(bool isActive){ // "Fingers" buttons 
         if(isActive)
             Invoke("ActivateButtons", 0.5f);
         normisButtonObject.SetActive(isActive);
         metalButtonObject.SetActive(isActive);
         return isActive;
-    }
-
-    private void ActivateButtons(){
-        normisButton.enabled = true;
-        metalButton.enabled = true;
     }
 
     public bool OnMinigameFinished(bool result){
