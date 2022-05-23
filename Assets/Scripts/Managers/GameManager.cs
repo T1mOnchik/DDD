@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     private GameObject metalButtonObject;
     private Button normisButton;
     private Button metalButton;
-    // private GameObject menu;    // ??????????????????????????????????
     private ProgressBarController moneyProgressBar;
     private ProgressBarController psycheProgressBar;
     private ProgressBarController popularityProgressBar;
@@ -47,9 +46,7 @@ public class GameManager : MonoBehaviour
         if(instance == null)
             instance = this;
             
-        // menu = GameObject.Find("MenuLayout");   // ???????????????????????????????????
         cards = new CSVParser().GenerateCardsScenario(CSVParser.Language.english, randomCardsQuantity); //default language(english)
-        // GetLanguagePack(0); //default language(english)
     }
 
     public void InitGame(){ 
@@ -84,7 +81,6 @@ public class GameManager : MonoBehaviour
                 language = CSVParser.Language.english;
             break;
         }
-        // cards = new CSVParser().GenerateCardsScenario(language, randomCardsQuantity); //ISSUE - WE REGENERATE SCENARIO EVERY TIME WE CHANGE LANGUAGE
         cards = new CSVParser().SwitchCardsLanguage(language, cards);
         if(step != 0){
             currentCard.GetComponent<CardController>().SetCardInfo(cards[step-1]);

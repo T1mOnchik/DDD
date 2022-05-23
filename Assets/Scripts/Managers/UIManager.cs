@@ -49,7 +49,6 @@ public class UIManager : MonoBehaviour
         stressIndicatorImage.GetComponent<Button>().onClick.AddListener(delegate{OnIndicatorClicked(1);});
         popIndicatorImage.GetComponent<Button>().onClick.AddListener(delegate{OnIndicatorClicked(2);});
         indicatorDescription.transform.Find("IndicatorDescriptionPanel").GetComponent<Button>().onClick.AddListener( () => indicatorDescription.SetActive(false) );
-        // ApplyLanguagePack(CSVParser.Language.english); //default interface language
     }
 
     private void OnIndicatorClicked(int indicatorNum){
