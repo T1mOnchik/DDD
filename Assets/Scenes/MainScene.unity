@@ -637,6 +637,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2fe65d022c8d79a4599ff2b998ef7f1e, type: 3}
   - {fileID: 8300000, guid: d5a48b6b0cadecf44907bec9edfc4102, type: 3}
   - {fileID: 8300000, guid: 57e6ed394f4ab0d46ad19391daaa420b, type: 3}
+  soundEffects:
+  - {fileID: 8300000, guid: 7e234f5f0c512044da2c628e06a4b6d9, type: 3}
+  - {fileID: 8300000, guid: 69b412e7bef81744bb3c24c21726c906, type: 3}
+  - {fileID: 8300000, guid: 44f5cd08e826f154598a5120f042895b, type: 3}
+  - {fileID: 8300000, guid: 110a32eb42fb56945b6ebbacfb84eb38, type: 3}
+  - {fileID: 8300000, guid: b802bb8f15fec1c49a1fd2053e10d465, type: 3}
+  - {fileID: 8300000, guid: 61f6f3fda6383194689770c803486b48, type: 3}
+  - {fileID: 8300000, guid: c0ca403dcad66fe4aa4df2571bc6b080, type: 3}
   guitarMusic: {fileID: 8300000, guid: 7ece3c1d05973904ab2ed3b4fee5852b, type: 3}
 --- !u!82 &276232758
 AudioSource:
