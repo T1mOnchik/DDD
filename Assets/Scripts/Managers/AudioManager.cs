@@ -11,9 +11,9 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     public static AudioManager instance;
     [SerializeField]private List<AudioClip> musicList;
+    [SerializeField]private List<AudioClip> soundEffects;
     // public List<AudioClip> guitarMusicList;
     [SerializeField]private AudioClip guitarMusic;
-
     private AudioSource mAudio;
     private bool isPlay = true;
     // IEnumerator Start()
@@ -91,4 +91,9 @@ public class AudioManager : MonoBehaviour
         StartCoroutine("MusicPlayer");
         yield break;
     }
+    public void PlaySoundEffect(int soundIndex)
+    {
+        mAudio.PlayOneShot(soundEffects[soundIndex], 1.0f);
+    }
+
 }
