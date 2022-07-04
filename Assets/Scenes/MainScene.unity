@@ -1064,6 +1064,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Credits
       objectReference: {fileID: 0}
+    - target: {fileID: 8167867849772523841, guid: 01c2c0e376d08c84d81545948daa80fd, type: 3}
+      propertyPath: m_Text
+      value: "Made by\n\nArtem Ivanov - Game Design, Coding\n\nNikita Shovkun - Game
+        Design, Scriptwriting\n\nMaria Kovalenko - Art & Design\n\nYurii Baburnych
+        - Coding\n\n\nMusic by: Ape On The Rocket\n\nBodybag\n\nCome Closer \n\nNecropolis
+        \n\nRats Hounds Wolves Bears"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01c2c0e376d08c84d81545948daa80fd, type: 3}
 --- !u!224 &438815464 stripped

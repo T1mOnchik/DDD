@@ -73,7 +73,7 @@ public class MenuController : MonoBehaviour
         GameObject.Find("LanguageLabel").GetComponent<Text>().text = strings["LanguageLabel"];
     }
 
-    private void ShowHideMenu(){
+    private void ShowHideMenu(){Debug.Log("111");
         settingsMenu.SetActive(!isMenuActive);
         isMenuActive = !isMenuActive;
         menuLayoutOfInteract.raycastTarget = isMenuActive;

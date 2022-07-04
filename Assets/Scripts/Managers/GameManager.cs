@@ -193,6 +193,13 @@ public class GameManager : MonoBehaviour
                 end.SetActive(true);
             }
         }
+        List<int> cardids = new List<int>();
+        cardids.Add(116);
+        cardids.Add(122);
+        cardids.Add(129);
+        cardids.Add(118);
+        cardids.Add(140);
+        new ObjSerializer().SaveGame(moneyProgressBar.current, popularityProgressBar.current, psycheProgressBar.current, step, cardids);
         step++;
         Debug.Log("step: "+step);
     }
@@ -243,4 +250,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("step: "+step);
         return result;
     }
+
+
 }
