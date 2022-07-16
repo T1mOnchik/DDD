@@ -3265,6 +3265,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResumeButton
       objectReference: {fileID: 0}
+    - target: {fileID: 4495194559718210557, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5241470979870389943, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
       propertyPath: m_Interactable
       value: 1
@@ -3325,7 +3329,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: EffectsVolumeLabel
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4654505171749076267, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8f7245cbbdf9fc84c8bf3ea642a0e6b1, type: 3}
 --- !u!1 &1525003159
 GameObject:
@@ -3937,7 +3942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ce108312febcf4386286e55fe280f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomCardsQuantity: 16
+  randomCardsQuantity: 14
   end: {fileID: 1705786317}
   encounterCardPrefab: {fileID: 7722798850588281713, guid: a525db8ff5c1a364db8082be6a1eedaa, type: 3}
   loseBackgroundColor:

@@ -17,17 +17,8 @@ public class ObjSerializer
     //                                                             //
     //                                                          ///////
 
-    [System.Serializable]
-    [XmlRoot("GameData")]
-    public class MySaveData
-    {
-        public int money;
-        public int popularity;
-        public int stress;
-        public int step;
-        public List<int> cardIds;
-    }
     
+    private GameSaveData gameSaveData;
 
     [System.Serializable]
     [XmlRoot("Settings")]
@@ -36,24 +27,19 @@ public class ObjSerializer
 
     }
     
-    public MySaveData MyData = new MySaveData();
+    // public MySaveData MyData = new MySaveData();
     public MySettingsData MySettings = new MySettingsData();
     private const string DATA_FILE_NAME = "GameData.sav";
     private const string SETTINGS_FILE_NAME = "Settings.sav";
 
-    private MySaveData LoadParameters()
-    {
-        Debug.Log(MyData.step);
-        return MyData;
-    }
+    // private GameSaveData LoadParameters()
+    // {   
+    //     return gameSaveData;
+    // }
 
     public void SaveParameters(int money, int popularity, int stress, int step, List<int> cardIds)
     {
-        MyData.money = money;
-        MyData.popularity = popularity;
-        MyData.stress = stress;
-        MyData.step = step;
-        MyData.cardIds = cardIds;
+        gameSaveData = new GameSaveData(money, popularity, stress, step, cardIds);
     }
 
     public void SaveGame(int money, int popularity, int stress, int step, List<int> cardIds)
@@ -66,21 +52,21 @@ public class ObjSerializer
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream Stream = File.Create(DATA_FILE_NAME);
-        bf.Serialize(Stream, MyData);
+        bf.Serialize(Stream, gameSaveData);
         Stream.Close();
     }
 
-    public void LoadGame()
+    public GameSaveData LoadGame()
     {
         if(!File.Exists(DATA_FILE_NAME))
-            return;
+            return null;
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream Stream = File.Open(DATA_FILE_NAME, FileMode.Open);
-        MyData = bf.Deserialize(Stream) as MySaveData;
+        gameSaveData = bf.Deserialize(Stream) as GameSaveData;
         Stream.Close();
 
-        LoadParameters();
+        return gameSaveData;
     }
 
     private MySettingsData LoadSettingsData()

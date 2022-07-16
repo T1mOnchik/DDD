@@ -5,6 +5,8 @@ using UnityEngine;
 public class CSVParser
 {
 
+    public List<int> encounterCardsIndexes;
+
     public enum Type{
         intro,  // prologue + tutorial
         random, // random event cards
@@ -34,20 +36,10 @@ public class CSVParser
     private const string ENG_FOLDERNAME = @"\english";
     private const string UA_FOLDERNAME = @"\ukrainian";
 
-    public List<Card> GenerateCardsScenario(Language language, int randomCardsQuantity){
+    public List<Card> GenerateCardsScenario(Language language, int randomCardsQuantity, List<int> loadedRandomCardsIds){
         List<Card> generalList = ConvertCSVToCards(Type.intro, language);
         
-        
-        // List<Card> plot = ConvertCSVToCards(CardType.plot, language);
-
-        // int countOfRandomsBetweenPlot = (random.Count % 3) % plot.Count; // Plot and random
-        // foreach(Card card in plot){
-        //     generalList.Add(card);
-        //     for(int i = 0; i < countOfRandomsBetweenPlot; i++)
-        //         generalList.Add(random[UnityEngine.Random.Range(0, random.Count - 1)]);
-        // }
-
-        foreach (Card card in GenerateRandomCardList(language, randomCardsQuantity))
+        foreach (Card card in GenerateRandomCardList(language, randomCardsQuantity, loadedRandomCardsIds))
             generalList.Add(card);
 
         foreach(Card card in ConvertCSVToCards(Type.concert, language))
@@ -166,27 +158,43 @@ public class CSVParser
         return result; 
     }
 
-    private List<Card> GenerateRandomCardList(Language language, int quantity){
+    private List<Card> GenerateRandomCardList(Language language, int quantity, List<int> loadedRandomCardsIds){
         List<Card> selectedRandomCards = new List<Card>();
         List<Card> allRandomCards = ConvertCSVToCards(Type.random, language);
-        List<int> encounterCardsIndexes = new List<int>();
+        if(loadedRandomCardsIds == null){
+            encounterCardsIndexes = new List<int>();
 
-        for(int i = 0; i < allRandomCards.Count; i++)
-            if(allRandomCards[i].isEncounter)
-                encounterCardsIndexes.Add(i);
+            for(int i = 0; i < allRandomCards.Count; i++)
+                if(allRandomCards[i].isEncounter)
+                    encounterCardsIndexes.Add(i);
 
-        if(quantity > encounterCardsIndexes.Count)
-            quantity = encounterCardsIndexes.Count;
+            if(quantity > encounterCardsIndexes.Count)
+                quantity = encounterCardsIndexes.Count;
 
-        for(int i = 0; i < quantity; i++){
-            int randomIndex = UnityEngine.Random.Range(0, encounterCardsIndexes.Count - 1);
-            int cardToAddIndex = encounterCardsIndexes[randomIndex]; //getting random index from list of encounterCards 
-            encounterCardsIndexes.RemoveAt(randomIndex);
+            quantity = encounterCardsIndexes.Count - quantity;
+            for(int i = 0; i < quantity; i++){
+                int randomIndex = UnityEngine.Random.Range(0, encounterCardsIndexes.Count - 1);
+                int cardToAddIndex = encounterCardsIndexes[randomIndex]; //getting random index from list of encounterCards 
+                encounterCardsIndexes.RemoveAt(randomIndex);
 
-            selectedRandomCards.Add(allRandomCards[cardToAddIndex]);       // adding encounter 
-            selectedRandomCards.Add(allRandomCards[cardToAddIndex + 1]);   // adding normis answer
-            selectedRandomCards.Add(allRandomCards[cardToAddIndex + 2]);   // adding metal answer
-        }   
+                
+
+                selectedRandomCards.Add(allRandomCards[cardToAddIndex]);       // adding encounter 
+                selectedRandomCards.Add(allRandomCards[cardToAddIndex + 1]);   // adding normis answer
+                selectedRandomCards.Add(allRandomCards[cardToAddIndex + 2]);   // adding metal answer
+            }   
+        }
+        else{
+            encounterCardsIndexes = loadedRandomCardsIds;
+            quantity = encounterCardsIndexes.Count - quantity;
+            for(int i = 0; i < quantity; i++){
+                selectedRandomCards.Add(allRandomCards[encounterCardsIndexes[i]]);       // adding encounter 
+                selectedRandomCards.Add(allRandomCards[encounterCardsIndexes[i] + 1]);   // adding normis answer
+                selectedRandomCards.Add(allRandomCards[encounterCardsIndexes[i] + 2]);   // adding metal answer
+            }
+
+        }
+            
         return selectedRandomCards;
     }
 

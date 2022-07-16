@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     private ProgressBarController psycheProgressBar;
     private ProgressBarController popularityProgressBar;
     private bool isGameOver = false;
+    private CSVParser csvParser;
 
     [Header("Cards")]
     [SerializeField]private int randomCardsQuantity; // max: 29
@@ -46,7 +47,8 @@ public class GameManager : MonoBehaviour
         if(instance == null)
             instance = this;
             
-        cards = new CSVParser().GenerateCardsScenario(CSVParser.Language.english, randomCardsQuantity); //default language(english)
+        csvParser = new CSVParser();
+        cards = csvParser.GenerateCardsScenario(CSVParser.Language.english, randomCardsQuantity, null); //default language(english)
     }
 
     public void InitGame(){ 
@@ -62,7 +64,7 @@ public class GameManager : MonoBehaviour
         metalButton.onClick.AddListener( () => ClickButton(true) );
         normisButtonAnimator = normisButtonObject.GetComponent<Animator>();
         metalButtonAnimator = metalButtonObject.GetComponent<Animator>();
-       
+        StartLoadedGame();
         RandomCard();
     }
 
@@ -85,14 +87,20 @@ public class GameManager : MonoBehaviour
                 language = CSVParser.Language.english;
             break;
         }
-        cards = new CSVParser().SwitchCardsLanguage(language, cards);
+        cards = csvParser.SwitchCardsLanguage(language, cards);
         if(step != 0){
             currentCard.GetComponent<CardController>().SetCardInfo(cards[step-1]);
         }
         UIManager.instance.ApplyLanguagePack(language);
     }
 
-    
+    private void StartLoadedGame(){
+        GameSaveData gameSaveData = new ObjSerializer().LoadGame();
+        if(gameSaveData != null){
+            List<Card> loadedCards = csvParser.GenerateCardsScenario(CSVParser.Language.english, randomCardsQuantity, gameSaveData.cardIds);
+            Debug.Log(loadedCards[gameSaveData.step].text);
+        }
+    }
 
     private void ClickButton(bool isMetalist){  // reaction on this encounter: step + 1 = normis; step + 2 = metalist 
         normisButton.enabled = false;
@@ -193,20 +201,15 @@ public class GameManager : MonoBehaviour
                 end.SetActive(true);
             }
         }
-        List<int> cardids = new List<int>();
-        cardids.Add(116);
-        cardids.Add(122);
-        cardids.Add(129);
-        cardids.Add(118);
-        cardids.Add(140);
-        new ObjSerializer().SaveGame(moneyProgressBar.current, popularityProgressBar.current, psycheProgressBar.current, step, cardids);
+        if(step!=0)
+            new ObjSerializer().SaveGame(moneyProgressBar.current, popularityProgressBar.current, psycheProgressBar.current, step, csvParser.encounterCardsIndexes);
         step++;
         Debug.Log("step: "+step);
     }
 
     private GameObject SpawnCard(bool isLose, string death){ 
         if(isLose){
-            currentCardModel = new CSVParser().GetDefeatCard(death, CSVParser.Language.russian);
+            currentCardModel = csvParser.GetDefeatCard(death, CSVParser.Language.russian);
             GameObject.Find("Background").GetComponent<Image>().color = loseBackgroundColor;
         }
             
@@ -235,6 +238,11 @@ public class GameManager : MonoBehaviour
         normisButtonObject.SetActive(isActive);
         metalButtonObject.SetActive(isActive);
         return isActive;
+    }
+
+    private void ActivateButtons(){
+        normisButton.enabled = true;
+        metalButton.enabled = true;
     }
 
     public bool OnMinigameFinished(bool result){
